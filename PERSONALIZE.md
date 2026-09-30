@@ -33,11 +33,13 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
 ## Members (`public/members.html`)
 
 - [x] **E-board term** — Fall 2026
-- [x] **E-board roles** — 12: President, Vice President, Secretary, Outreach,
-      External Affairs, Education, Social Media, Recruitment, Philanthropy,
-      Risk Management, DEI, Innovation
-- [ ] **E-board names + headshots** — all 12 still `[Name]` on a placeholder
-      headshot. Square photos look best.
+- [x] **E-board roles** — 13, using the chapter's "Director of" convention:
+      President, Vice President, Secretary, Director of Finance, Recruitment,
+      Philanthropy, Risk Management, Innovations, Outreach, External Affairs,
+      Education, Social Media, DEI
+- [ ] **E-board names + headshots** — all 13 still `[Name]` on a placeholder
+      headshot. Square photos look best. Note Recruitment has two holders, so
+      it needs a second card once names go in.
 - [ ] **Active members** — names and class years
 
 ## Rush (`public/rush.html`)
