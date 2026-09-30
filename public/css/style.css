@@ -257,6 +257,7 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); ou
 .hero-content { position: relative; z-index: 1; }
 .hero .hero-uni { color: #fff; filter: none; font-weight: 700; }
 .hero-anim { display: inline-block; opacity: 0; }
+div.hero-anim:not(.hero-subtitle) { display: block; }
 .intro-done .hero-anim { animation: rise .9s cubic-bezier(.2, .7, .2, 1) both; animation-delay: var(--d, 0s); }
 @keyframes rise { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 
