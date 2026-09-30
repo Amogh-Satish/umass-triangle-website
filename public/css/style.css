@@ -194,6 +194,21 @@ img { max-width: 100%; display: block; }
 .page-header h2 { font-family: var(--font-display); font-size: 3.25rem; font-weight: 700; margin: 0 0 12px; }
 .page-header p { color: var(--muted); max-width: 640px; margin: 0 auto; }
 
+/* Rush pitch. Set in the display serif so it reads as a line of the chapter's own
+   voice rather than body copy, at 600 -- enough to carry weight without competing
+   with the 700 heading above it. Kept a step off pure white so the hierarchy still
+   runs heading -> pitch -> tiles. */
+.rush-pitch {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, .88);
+  max-width: 30ch;
+  margin: 18px auto 0;
+  text-wrap: balance;
+}
+
 .section { padding: 40px 16px 70px; }
 .section-header { text-align: center; margin-bottom: 36px; }
 .section-header h2 { color: var(--muted); font-size: .9rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin: 0; }
