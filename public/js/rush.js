@@ -10,6 +10,26 @@ document.getElementById('rush-links').innerHTML = (r.links || [])
   .map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`)
   .join('<span style="color:var(--muted)">|</span>');
 
+// Countdown to rush (set rush.date in Site Settings; hidden when blank or past)
+const start = r.date ? new Date(r.date) : null;
+const cd = document.getElementById('countdown');
+if (start && !isNaN(start) && start > Date.now()) {
+  cd.hidden = false;
+  const units = [['days', 86400], ['hrs', 3600], ['min', 60], ['sec', 1]];
+  cd.innerHTML = `<div class="countdown-title">Rush ${esc(r.season || '')} starts in</div>` +
+    units.map(([u]) => `<div class="unit"><b data-u="${u}">0</b><span>${u}</span></div>`).join('');
+  const tick = () => {
+    let left = Math.max(0, Math.floor((start - Date.now()) / 1000));
+    if (!left) { cd.innerHTML = '<div class="countdown-title">Rush is happening now!</div>'; return clearInterval(timer); }
+    for (const [u, secs] of units) {
+      cd.querySelector(`[data-u="${u}"]`).textContent = String(Math.floor(left / secs)).padStart(2, '0');
+      left %= secs;
+    }
+  };
+  const timer = setInterval(tick, 1000);
+  tick();
+}
+
 const banner = document.getElementById('rush-banner');
 if (site.rushBanner) banner.src = site.rushBanner; else banner.remove();
 refreshAnimations();

@@ -66,7 +66,7 @@ const IMAGE_KEY = /logo|image|banner|photo/i;
 const LABELS = {
   siteTitle: 'Site title (header)', chapterName: 'Chapter name (hero, highlighted)', university: 'University',
   tagline: 'Tagline (hero pill)', heroImage: 'Hero background image', rushBanner: 'Rush page banner',
-  eboardTerm: 'E-Board term (e.g. Fall 2026)', formEnabled: 'Show built-in interest form', credits: 'Footer credits',
+  eboardTerm: 'E-Board term (e.g. Fall 2026)', stats: 'Home page stats (numbers count up)', formEnabled: 'Show built-in interest form', credits: 'Footer credits',
 };
 const nice = (k) => LABELS[k] || k.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase());
 
@@ -77,6 +77,9 @@ function fieldHtml(key, value, path) {
   }
   if (typeof value === 'string') {
     const long = value.length > 90;
+    if (key === 'date') {
+      return `<div class="field"><label for="${id}">Rush start date &amp; time (shows a countdown; leave blank to hide)</label><input type="datetime-local" id="${id}" data-path="${path}" value="${esc(value)}"></div>`;
+    }
     const input = long
       ? `<textarea id="${id}" data-path="${path}" rows="3">${esc(value)}</textarea>`
       : `<input id="${id}" data-path="${path}" value="${esc(value)}" ${/color|accent|background|surface/i.test(key) ? 'type="text" placeholder="#rrggbb"' : ''}>`;
@@ -85,7 +88,8 @@ function fieldHtml(key, value, path) {
     return `<div class="field"><label for="${id}">${esc(nice(key))}</label><div class="with-upload">${input}${swatch}${up}</div></div>`;
   }
   if (Array.isArray(value)) {
-    return `<fieldset><legend>${esc(nice(key))}</legend>
+    const shape = Object.keys(value[0] || { label: '', url: '' }).join(',');
+    return `<fieldset data-shape="${shape}"><legend>${esc(nice(key))}</legend>
       <div data-array="${path}">${value.map((v, i) => arrayItemHtml(v, `${path}.${i}`)).join('')}</div>
       <button type="button" class="btn" data-add="${path}"><i class="bi bi-plus"></i> Add</button></fieldset>`;
   }
@@ -128,7 +132,8 @@ async function renderSettings() {
     const add = e.target.closest('[data-add]');
     if (add) {
       const wrap = form.querySelector(`[data-array="${add.dataset.add}"]`);
-      wrap.insertAdjacentHTML('beforeend', arrayItemHtml({ label: '', url: '' }, `${add.dataset.add}.${Date.now()}`));
+      const blank = Object.fromEntries(add.closest('fieldset').dataset.shape.split(',').map((k) => [k, '']));
+      wrap.insertAdjacentHTML('beforeend', arrayItemHtml(blank, `${add.dataset.add}.${Date.now()}`));
     }
   });
   form.addEventListener('input', (e) => {
