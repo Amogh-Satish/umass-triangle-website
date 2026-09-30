@@ -14,8 +14,11 @@ grep -rn '\[' public/*.html | grep -v '<!--'
 The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
 `address.html` and `404.html`. Change one, change all five.
 
-- [ ] **Chapter email + Instagram** — uncomment the `header-social` block and fill in
-      the real links
+- [x] **Instagram** — wired: `instagram.com/triangleumassamherst`
+- [ ] **Chapter email** — the one thing still outstanding. Replace
+      `CHAPTER-EMAIL@umass.edu` in `rush.html` and in the header of all five pages,
+      then uncomment the envelope in `header-social`. The subject line is already
+      pre-filled as "Rush interest form - NEW MEMBER".
 - [ ] **Footer credits** — replace `[Designed by Name '27; Maintained by Name '28]`
 
 ## Home (`public/index.html`)
@@ -36,8 +39,6 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
 
 ## Rush (`public/rush.html`)
 
-- [ ] **Interest form URL** — the `[Rush interest form]` link is currently `#`
-- [ ] **Email + Instagram** links in the same row
 - [ ] **Rush banner** image
 - [ ] **Countdown** — set `data-date` on `#countdown`, e.g. `data-date="2026-09-08T19:00"`
 
