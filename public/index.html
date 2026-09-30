@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>try{if(sessionStorage.getItem('introSeen'))document.documentElement.classList.add('no-intro','intro-done')}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Triangle</title>
   <meta name="description" content="Triangle Fraternity — the social fraternity of engineers, architects, and scientists.">
@@ -22,15 +23,18 @@
       <line class="side s3" x1="6" y1="84" x2="50" y2="6"/>
     </svg>
   </div>
-  <section class="hero" id="hero" data-aos="fade" data-aos-delay="1400">
-    <div>
-      <h2><span id="hero-chapter"></span><br><span id="hero-university" style="color:#fff;filter:none;font-weight:700"></span></h2>
-      <div class="hero-subtitle" id="hero-tagline"></div>
-      <div><a href="/rush" class="btn-accent">Rush Triangle</a></div>
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-content">
+      <h2><span class="hero-anim" style="--d:0s" id="hero-chapter"></span><br><span class="hero-anim hero-uni" style="--d:.15s" id="hero-university"></span></h2>
+      <div class="hero-subtitle hero-anim" style="--d:.35s"><span id="hero-tagline"></span><span class="caret" aria-hidden="true"></span></div>
+      <div class="hero-anim" style="--d:.55s"><a href="/rush" class="btn-accent">Rush Triangle</a></div>
     </div>
+    <a href="#stats" class="scroll-cue hero-anim" style="--d:.9s" aria-label="Scroll down"><i class="bi bi-chevron-double-down"></i></a>
   </section>
 
-  <main data-aos="fade">
+  <main>
+    <section class="stats" id="stats"></section>
     <section class="gallery">
       <div class="gallery-grid" id="gallery-grid"></div>
     </section>

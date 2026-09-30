@@ -18,11 +18,18 @@
     "linkedin": "",
     "email": "[chapter-email@umass.edu]"
   },
+  "stats": [
+    { "value": "[XX]", "label": "Active Brothers" },
+    { "value": "[YYYY]", "label": "Chapter Founded" },
+    { "value": "[X.XX]", "label": "Chapter GPA" },
+    { "value": "[XX]", "label": "Service Hours / Semester" }
+  ],
   "eboardTerm": "[Semester Year]",
   "rush": {
     "heading": "Rush Triangle",
     "blurb": "We are looking for driven engineers, scientists, and architects to join our brotherhood. [Replace with your chapter's rush pitch.]",
     "season": "[F26]",
+    "date": "",
     "links": [
       { "label": "[Rush group chat / page]", "url": "#" },
       { "label": "[External interest form]", "url": "#" }
