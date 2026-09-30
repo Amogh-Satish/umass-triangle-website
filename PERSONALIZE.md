@@ -36,7 +36,6 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
 
 ## Rush (`public/rush.html`)
 
-- [ ] **Rush pitch** — replace the bracketed blurb
 - [ ] **Interest form URL** — the `[Rush interest form]` link is currently `#`
 - [ ] **Email + Instagram** links in the same row
 - [ ] **Rush banner** image

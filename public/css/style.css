@@ -227,6 +227,7 @@ img { max-width: 100%; display: block; }
    hover. Icons stay white/neutral rather than accent red, so the eye reads the
    row as one set of options instead of three competing calls to action. */
 .rush-tile {
+  position: relative; z-index: 0;
   display: flex; flex-direction: column; align-items: center; gap: 11px;
   min-width: 168px; padding: 24px 26px;
   background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
@@ -243,13 +244,16 @@ img { max-width: 100%; display: block; }
    at specificity (0,3,0), which silently beats a plain `.rush-tile:hover` and kills
    the lift while letting the colour and shadow through. (0,3,1) wins it back. */
 .rush-links a.rush-tile:hover, .rush-links a.rush-tile:focus-visible {
-  transform: translateY(-6px);
+  z-index: 1;
+  /* transform scales the painted tile without touching layout, so the neighbours
+     don't shuffle as it grows */
+  transform: translateY(-6px) scale(1.06);
   background: var(--surface-2);
   border-color: rgba(255, 255, 255, .28);
   box-shadow: 0 16px 36px rgba(0, 0, 0, .55);
 }
 .rush-tile:hover i, .rush-tile:focus-visible i { color: #fff; transform: scale(1.1); }
-.rush-links a.rush-tile:active { transform: translateY(-2px); }
+.rush-links a.rush-tile:active { transform: translateY(-2px) scale(1.02); }
 .rush-banner { width: 100%; max-width: 1100px; margin: 20px auto 0; border-radius: 12px; }
 
 /* The coat of arms is portrait and transparent, so the full-bleed banner rule
