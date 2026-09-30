@@ -307,9 +307,27 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); ou
     radial-gradient(70% 54% at 50% 106%,
       rgba(214, 56, 66, .30) 0%, rgba(198, 48, 60, .175) 26%,
       rgba(168, 40, 52, .075) 50%, transparent 74%),
-    /* base ramp, bottom stop warmed a touch so the glow looks like it comes off
-       the surface instead of floating on it */
-    linear-gradient(176deg, #212429 0%, #181A1F 46%, #130F12 100%);
+    /* base ramp, pushed toward black and warmed at the bottom so the glow looks
+       like it comes off the surface instead of floating on it */
+    linear-gradient(176deg, #1A1C22 0%, #121317 46%, #0C0A0C 100%);
+}
+
+/* Delta T watermark. A separate layer rather than another background-image on
+   .hero-bg--gradient, because CSS can't set per-layer opacity -- this way the
+   fade is one number to tune. Held at 7%: legible as a mark, nowhere near enough
+   to compete with the title sitting on top of it. */
+.hero-bg--gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url('../img/brand/delta-t-watermark.svg') no-repeat center 44% / auto 74%;
+  opacity: .07;
+}
+
+/* On a short screen the mark crowds the text, so pull it in. */
+@media (max-height: 700px) {
+  .hero-bg--gradient::after { background-size: auto 60%; opacity: .06; }
 }
 .hero-content { position: relative; z-index: 1; }
 .hero .hero-uni { color: #fff; filter: none; font-weight: 700; }
