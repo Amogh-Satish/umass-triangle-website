@@ -45,12 +45,14 @@ img { max-width: 100%; display: block; }
 #preloader .s3 { animation-delay: .75s; }
 @keyframes tri-draw { to { stroke-dashoffset: 0; } }
 
-/* each side flies outward along its own normal */
-#preloader.split { background-color: transparent; }
-#preloader.split .s1 { transform: translate(60px, -35px) rotate(25deg); opacity: 0; }
-#preloader.split .s2 { transform: translate(0, 70px) rotate(-12deg); opacity: 0; }
-#preloader.split .s3 { transform: translate(-60px, -35px) rotate(-25deg); opacity: 0; }
-#preloader.split .side { stroke: var(--accent); }
+/* once drawn, the triangle flashes the accent color, then its three sides
+   fly apart along their outward normals (right / bottom / left) */
+#preloader.lit .side { stroke: var(--accent); stroke-width: 2; filter: drop-shadow(0 0 6px var(--accent)); transition: stroke .2s, stroke-width .2s; }
+#preloader.split { background-color: transparent; transition: background-color .9s ease .15s; }
+#preloader.split .side { transition: transform 1s cubic-bezier(.55, 0, .25, 1), opacity .9s ease .15s; opacity: 0; }
+#preloader.split .s1 { transform: translate(34vmin, -20vmin) rotate(35deg); }
+#preloader.split .s2 { transform: translate(0, 38vmin) rotate(-15deg); }
+#preloader.split .s3 { transform: translate(-34vmin, -20vmin) rotate(-35deg); }
 #preloader.done { visibility: hidden; }
 .no-intro #preloader { display: none; }
 @media (prefers-reduced-motion: reduce) {

@@ -9,7 +9,7 @@ bg.style.backgroundImage = `linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url
 document.getElementById('hero-chapter').textContent = site.chapterName;
 document.getElementById('hero-university').textContent = site.university;
 typeText(document.getElementById('hero-tagline'), site.tagline, {
-  delay: introPlaying ? 1700 : 500,
+  delay: introPlaying ? 1900 : 500,
   caret: document.querySelector('#hero .caret'),
 });
 
