@@ -63,11 +63,20 @@ export async function initLayout(active) {
     </footer>
     <a href="#" class="scroll-top" id="scroll-top" aria-label="Back to top"><i class="bi bi-arrow-up-short"></i></a>`);
 
+  document.body.insertAdjacentHTML('afterbegin', '<div class="scroll-progress" id="scroll-progress"></div>');
   const header = document.getElementById('header');
   const top = document.getElementById('scroll-top');
+  const progress = document.getElementById('scroll-progress');
+  let lastY = scrollY;
   const onScroll = () => {
-    header.classList.toggle('scrolled', scrollY > 60);
-    top.classList.toggle('show', scrollY > 100);
+    const y = scrollY;
+    header.classList.toggle('scrolled', y > 60);
+    // hide the header while scrolling down, bring it back on any scroll up
+    header.classList.toggle('hidden', y > 300 && y > lastY && !document.getElementById('navbar').classList.contains('open'));
+    top.classList.toggle('show', y > 100);
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    lastY = y;
   };
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -79,15 +88,22 @@ export async function initLayout(active) {
     toggle.innerHTML = `<i class="bi ${open ? 'bi-x' : 'bi-list'}"></i>`;
   });
 
-  // Triangle draws itself (~1.1s), then splits into its three sides, then the overlay fades.
-  const hidePreloader = () => {
-    const pre = document.getElementById('preloader');
-    if (!pre) return;
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return pre.classList.add('done');
-    setTimeout(() => pre.classList.add('split'), 1150);
-    setTimeout(() => pre.classList.add('done'), 1650);
-  };
-  document.readyState === 'complete' ? hidePreloader() : addEventListener('load', hidePreloader);
+  // Intro plays once per browser session: triangle draws (~1.1s), splits three ways, overlay fades.
+  // The inline <head> script adds .no-intro/.intro-done on later page views so it's skipped.
+  const html = document.documentElement;
+  const pre = document.getElementById('preloader');
+  const skipIntro = html.classList.contains('no-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (skipIntro || !pre) {
+    pre?.remove();
+    html.classList.add('intro-done');
+  } else {
+    try { sessionStorage.setItem('introSeen', '1'); } catch {}
+    const play = () => {
+      setTimeout(() => { pre.classList.add('split'); html.classList.add('intro-done'); }, 1150);
+      setTimeout(() => pre.remove(), 1900);
+    };
+    document.readyState === 'complete' ? play() : addEventListener('load', play);
+  }
 
   window.AOS?.init({ duration: 900, easing: 'ease-in-out', once: true });
   return site;
@@ -95,3 +111,64 @@ export async function initLayout(active) {
 
 // Call after injecting dynamic content so scroll animations re-measure positions.
 export const refreshAnimations = () => window.AOS?.refreshHard();
+
+const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Subtle 3D tilt that follows the pointer, plus a glare highlight. Mouse/pen only.
+export function tilt(els, max = 8) {
+  if (reduceMotion()) return;
+  for (const el of els) {
+    el.dataset.tilt = '';
+    el.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      el.style.transform = `perspective(800px) rotateX(${(0.5 - y) * max}deg) rotateY(${(x - 0.5) * max}deg) translateY(-4px)`;
+      el.style.setProperty('--gx', `${x * 100}%`);
+      el.style.setProperty('--gy', `${y * 100}%`);
+    });
+    el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+  }
+}
+
+// Counts a number up from 0 when it scrolls into view. Non-numeric values (e.g. "[XX]") show as-is.
+export function countUp(el, text, duration = 1600) {
+  const m = String(text).match(/^(\D*)([\d,]*\.?\d+)(.*)$/);
+  if (!m || reduceMotion()) { el.textContent = text; return; }
+  const [, pre, numStr, post] = m;
+  const target = parseFloat(numStr.replace(/,/g, ''));
+  const decimals = (numStr.split('.')[1] || '').length;
+  const useCommas = numStr.includes(',');
+  // Years like 1907 shouldn't get a thousands separator or count from 0.
+  const from = /^(1[89]|20)\d\d$/.test(numStr) ? target - 40 : 0;
+  const fmt = (v) => {
+    const s = v.toFixed(decimals);
+    return pre + (useCommas ? Number(s).toLocaleString('en-US', { minimumFractionDigits: decimals }) : s) + post;
+  };
+  el.textContent = fmt(from);
+  new IntersectionObserver(([entry], obs) => {
+    if (!entry.isIntersecting) return;
+    obs.disconnect();
+    el.closest('.stat')?.classList.add('seen');
+    const t0 = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - t0) / duration, 1);
+      el.textContent = fmt(from + (target - from) * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, { threshold: 0.4 }).observe(el);
+}
+
+// Types text into an element one character at a time.
+export function typeText(el, text, { delay = 0, speed = 38, caret } = {}) {
+  if (reduceMotion()) { el.textContent = text; caret?.classList.add('gone'); return; }
+  el.textContent = '';
+  let i = 0;
+  setTimeout(function tick() {
+    el.textContent = text.slice(0, ++i);
+    if (i < text.length) setTimeout(tick, speed);
+    else setTimeout(() => caret?.classList.add('gone'), 1800);
+  }, delay);
+}
