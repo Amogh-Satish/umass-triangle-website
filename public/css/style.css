@@ -140,12 +140,15 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-title);
   font-weight: 800; font-size: 3.5rem; line-height: 1.1;
   margin: 0 0 25px;
-  /* Two layers: a tight one for edge definition, and a wide soft one that darkens
-     the gradient behind the letterforms. On a dark ground the tight shadow alone
-     is invisible -- the wide pass is what actually lifts the text off the page. */
+  /* Three passes: a tight one for edge definition, then two progressively wider
+     ones that darken the gradient behind the letterforms. On a dark ground the
+     tight shadow alone is invisible -- the wide passes are what lift the text off
+     the page, and stacking two of them keeps the falloff smooth instead of ending
+     in a visible ring. */
   text-shadow:
-    0 1px 2px rgba(0, 0, 0, .55),
-    0 5px 16px rgba(0, 0, 0, .45);
+    0 2px 3px rgba(0, 0, 0, .6),
+    0 8px 24px rgba(0, 0, 0, .68),
+    0 18px 52px rgba(0, 0, 0, .5);
 }
 .hero h2 span { color: var(--accent); font-weight: 900; filter: brightness(1.35); }
 .hero-subtitle {
