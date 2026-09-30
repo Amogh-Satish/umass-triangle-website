@@ -37,9 +37,9 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
       President, Vice President, Secretary, Director of Finance, Recruitment,
       Philanthropy, Risk Management, Innovations, Outreach, External Affairs,
       Education, Social Media, DEI
-- [ ] **E-board names + headshots** — all 13 still `[Name]` on a placeholder
-      headshot. Square photos look best. Note Recruitment has two holders, so
-      it needs a second card once names go in.
+- [ ] **E-board names + headshots** — Nihaal Thakran and Anurag Dasgupta are in
+      (Directors of Recruitment); the other 12 are still `[Name]` on a placeholder
+      headshot. Square photos look best. Drop them in `public/img/eboard/`.
 - [ ] **Active members** — names and class years
 
 ## Rush (`public/rush.html`)
