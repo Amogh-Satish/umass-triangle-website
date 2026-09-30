@@ -11,8 +11,10 @@ Everything below is a placeholder right now. Most of it can be done from **/admi
 - [ ] **Rush banner**: wide image at the bottom of the Rush page
 - [ ] **Theme colors**: `accent` is UMass maroon `#881c1c` by default; change if you like
 - [ ] **Social links**: Instagram, Facebook, LinkedIn, chapter email (blank or `[bracketed]` values are hidden)
+- [ ] **Stats**: the numbers on the home page that count up (active brothers, year founded, GPA, service hours). Edit, add or remove them.
 - [ ] **E-Board term**: e.g. "Fall 2026"
 - [ ] **Rush**: blurb, season, and links (group chat, external form, etc.)
+- [ ] **Rush date**: set it to show a live countdown on the Rush page (hidden when blank or once it passes)
 - [ ] **Footer credits**
 
 ## Content (admin tabs)
