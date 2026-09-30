@@ -3,7 +3,7 @@
 # Usage: scripts/setup-github.sh [repo-name]
 set -euo pipefail
 cd "$(dirname "$0")/.."
-NAME="${1:-umass-triangle}"
+NAME="${1:-umass-triangle-website}"
 
 if ! gh auth status >/dev/null 2>&1; then
   echo "Not signed in to GitHub. Run:  gh auth login   then re-run this script."
