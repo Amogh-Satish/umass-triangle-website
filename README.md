@@ -49,3 +49,14 @@ Admin (cookie session): `PUT /api/site`, `POST|PUT|DELETE /api/{gallery,eboard,m
 - Set a strong `ADMIN_PASSWORD` and serve over HTTPS.
 - Replace every placeholder (the admin Checklist should say 0 left).
 - Pick a host with a persistent disk (Render, Railway, Fly.io, or a VPS), since the database and uploads are files on disk.
+
+## Contributing (collaborators)
+
+`main` is protected: collaborators can't push to it directly. To make changes:
+
+1. Create your own branch: `git switch -c your-name`
+2. Commit and push it: `git push -u origin your-name`
+3. On GitHub, open a **Pull Request** into `main`.
+4. The tests run automatically. Once they pass, the repo owner reviews and merges.
+
+Only the repo owner (admin) can push straight to `main`, which is how auto-push works.
