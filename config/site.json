@@ -1,0 +1,35 @@
+{
+  "_comment": "Every value in [brackets] is a placeholder. Edit here or from /admin -> Site Settings.",
+  "siteTitle": "UMass Triangle",
+  "chapterName": "[Greek Letter] Chapter",
+  "university": "University of Massachusetts Amherst",
+  "tagline": "The Social Fraternity of Engineers, Architects, and Scientists",
+  "logo": "/img/logo-placeholder.svg",
+  "heroImage": "/placeholder/1920/1080.svg?label=Hero%20photo%20(house%20or%20chapter)",
+  "rushBanner": "/placeholder/1200/500.svg?label=Rush%20banner",
+  "theme": {
+    "accent": "#881c1c",
+    "background": "#161718",
+    "surface": "#222326"
+  },
+  "social": {
+    "instagram": "[https://instagram.com/your-handle]",
+    "facebook": "[https://facebook.com/your-page]",
+    "linkedin": "",
+    "email": "[chapter-email@umass.edu]"
+  },
+  "eboardTerm": "[Semester Year]",
+  "rush": {
+    "heading": "Rush Triangle",
+    "blurb": "We are looking for driven engineers, scientists, and architects to join our brotherhood. [Replace with your chapter's rush pitch.]",
+    "season": "[F26]",
+    "links": [
+      { "label": "[Rush group chat / page]", "url": "#" },
+      { "label": "[External interest form]", "url": "#" }
+    ],
+    "formEnabled": true
+  },
+  "footer": {
+    "credits": "[Designed by Name '27; Maintained by Name '28]"
+  }
+}

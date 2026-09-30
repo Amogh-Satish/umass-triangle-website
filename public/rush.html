@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Triangle</title>
+  <meta name="description" content="Triangle Fraternity — the social fraternity of engineers, architects, and scientists.">
+  <link rel="icon" href="/img/logo-placeholder.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="preloader" aria-hidden="true">
+    <svg class="tri" viewBox="0 0 100 90" width="150" height="135">
+      <line class="side s1" x1="50" y1="6" x2="94" y2="84"/>
+      <line class="side s2" x1="94" y1="84" x2="6" y2="84"/>
+      <line class="side s3" x1="6" y1="84" x2="50" y2="6"/>
+    </svg>
+  </div>
+  <main data-aos="fade" data-aos-delay="50">
+    <div class="page-header">
+      <h2 id="rush-heading">Rush Triangle</h2>
+      <p id="rush-blurb"></p>
+      <div class="rush-links" id="rush-links"></div>
+    </div>
+
+    <section class="section" id="rush-form-section" hidden>
+      <form class="card-form" id="rush-form" novalidate>
+        <h3>Interest Form</h3>
+        <div class="form-grid">
+          <div><label for="f-name">Full name *</label><input id="f-name" name="name" required maxlength="120" autocomplete="name"></div>
+          <div><label for="f-email">Email *</label><input id="f-email" name="email" type="email" required maxlength="200" autocomplete="email"></div>
+          <div><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" maxlength="40" autocomplete="tel"></div>
+          <div><label for="f-year">Year</label>
+            <select id="f-year" name="year"><option value="">Select…</option><option>Freshman</option><option>Sophomore</option><option>Junior</option><option>Senior</option><option>Transfer</option><option>Graduate</option></select>
+          </div>
+          <div class="full"><label for="f-major">Major</label><input id="f-major" name="major" maxlength="120"></div>
+          <div class="full"><label for="f-msg">Anything you'd like us to know?</label><textarea id="f-msg" name="message" rows="4" maxlength="2000"></textarea></div>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        </div>
+        <div style="margin-top:18px"><button class="btn-accent" type="submit">Submit</button></div>
+        <div class="form-msg" id="form-msg" role="status"></div>
+      </form>
+    </section>
+
+    <section class="section" style="padding-top:0"><img id="rush-banner" class="rush-banner" alt=""></section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script type="module" src="/js/rush.js"></script>
+</body>
+</html>
