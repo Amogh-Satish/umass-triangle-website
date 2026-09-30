@@ -221,8 +221,47 @@ img { max-width: 100%; display: block; }
 @media (max-width: 575px) { .member-list ul { columns: 1; } }
 
 /* rush */
-.rush-links { margin: 22px 0; display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: center; font-weight: 700; }
+.rush-links { margin: 30px 0 0; display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+
+/* Rush tiles. They slide in from the right on scroll (AOS fade-left) and lift on
+   hover. Icons stay white/neutral rather than accent red, so the eye reads the
+   row as one set of options instead of three competing calls to action. */
+.rush-tile {
+  display: flex; flex-direction: column; align-items: center; gap: 11px;
+  min-width: 168px; padding: 24px 26px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  color: var(--text); text-decoration: none;
+  transition: transform .24s cubic-bezier(.2, .7, .2, 1), box-shadow .24s ease,
+              border-color .24s ease, background-color .24s ease;
+}
+.rush-tile i { font-size: 1.75rem; line-height: 1; color: rgba(255, 255, 255, .8);
+               transition: color .24s ease, transform .24s cubic-bezier(.2, .7, .2, 1); }
+.rush-tile span { font-size: .93rem; font-weight: 600; }
+
+/* The selector is deliberately over-qualified. AOS ships
+   `[data-aos^=fade][data-aos^=fade].aos-animate { transform: translate3d(0,0,0) }`
+   at specificity (0,3,0), which silently beats a plain `.rush-tile:hover` and kills
+   the lift while letting the colour and shadow through. (0,3,1) wins it back. */
+.rush-links a.rush-tile:hover, .rush-links a.rush-tile:focus-visible {
+  transform: translateY(-6px);
+  background: var(--surface-2);
+  border-color: rgba(255, 255, 255, .28);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .55);
+}
+.rush-tile:hover i, .rush-tile:focus-visible i { color: #fff; transform: scale(1.1); }
+.rush-links a.rush-tile:active { transform: translateY(-2px); }
 .rush-banner { width: 100%; max-width: 1100px; margin: 20px auto 0; border-radius: 12px; }
+
+/* The coat of arms is portrait and transparent, so the full-bleed banner rule
+   would stretch it to ~1400px tall. Height-constrained and centred instead, with
+   no radius since there is no rectangle to round. */
+.rush-banner--crest {
+  width: auto; max-width: 100%;
+  height: clamp(210px, 36vh, 360px);
+  display: block; margin: 26px auto 0;
+  border-radius: 0;
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, .6));
+}
 .card-form {
   max-width: 640px; margin: 0 auto;
   background: var(--surface); border-radius: 16px; padding: 28px;
@@ -400,5 +439,9 @@ div.hero-anim:not(.hero-subtitle) { display: block; }
   .hero-anim, .intro-done .hero-anim, .intro-done .scroll-cue { opacity: 1; animation: none; }
   .caret { display: none; }
   [data-tilt] { transform: none !important; }
+  /* keep the hover feedback, drop the movement */
+  .rush-tile, .rush-tile i { transition: none; }
+  .rush-links a.rush-tile:hover, .rush-links a.rush-tile:focus-visible { transform: none; }
+  .rush-tile:hover i, .rush-tile:focus-visible i { transform: none; }
   @view-transition { navigation: none; }
 }
