@@ -361,7 +361,10 @@ div.hero-anim:not(.hero-subtitle) { display: block; }
 /* stats band with count-up numbers */
 .stats {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;
-  max-width: 1100px; margin: 0 auto; padding: 50px 16px 20px; text-align: center;
+  /* Sized for the three tiles now in the row -- at the old 1100px each one stretched
+     to ~356px and the numbers swam in empty space. auto-fit still handles a fourth
+     if one gets added back: 4 x 213px clears the 180px minimum. */
+  max-width: 900px; margin: 0 auto; padding: 50px 16px 20px; text-align: center;
 }
 .stat { padding: 18px 10px; border-radius: 14px; background: var(--surface); }
 .stat .num { font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; line-height: 1.1; color: #fff; font-variant-numeric: tabular-nums; }
