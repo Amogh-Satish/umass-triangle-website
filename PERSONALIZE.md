@@ -32,9 +32,13 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
 
 ## Members (`public/members.html`)
 
-- [ ] **E-board term** — `[Semester Year]`
-- [ ] **E-board** — 8 `[Name]` entries plus square headshots
-- [ ] **Chairholders and active members** — names and class years
+- [x] **E-board term** — Fall 2026
+- [x] **E-board roles** — 12: President, Vice President, Secretary, Outreach,
+      External Affairs, Education, Social Media, Recruitment, Philanthropy,
+      Risk Management, DEI, Innovation
+- [ ] **E-board names + headshots** — all 12 still `[Name]` on a placeholder
+      headshot. Square photos look best.
+- [ ] **Active members** — names and class years
 
 ## Rush (`public/rush.html`)
 
