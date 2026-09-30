@@ -19,7 +19,7 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
       `CHAPTER-EMAIL@umass.edu` in `rush.html` and in the header of all five pages,
       then uncomment the envelope in `header-social`. The subject line is already
       pre-filled as "Rush interest form - NEW MEMBER".
-- [ ] **Footer credits** — replace `[Designed by Name '27; Maintained by Name '28]`
+- [x] **Footer credits** — Nihaal Thakran '29 and Amogh Satish '29
 
 ## Home (`public/index.html`)
 
