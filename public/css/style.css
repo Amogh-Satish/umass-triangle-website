@@ -219,7 +219,12 @@ img { max-width: 100%; display: block; }
   background: var(--surface); border-radius: 12px;
   padding: 28px 20px; text-align: center; height: 100%;
 }
-.eboard-card img { width: 100%; max-width: 260px; aspect-ratio: 1; object-fit: cover; border-radius: 10px; margin: 0 auto 16px; }
+/* height:auto is load-bearing. The <img> carries width/height attributes (they
+   reserve space so the carousel doesn't reflow as headshots load), and those make
+   the height definite -- which makes the browser ignore aspect-ratio entirely and
+   render the image at its attribute height. Letting height resolve to auto hands
+   the sizing back to aspect-ratio. */
+.eboard-card img { width: 100%; max-width: 260px; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 10px; margin: 0 auto 16px; }
 .eboard-card h3 { font-size: 1.2rem; font-weight: 700; margin: 0 0 4px; }
 .eboard-card h4 { font-size: .9rem; color: var(--muted); font-weight: 400; margin: 0; }
 .swiper { padding-bottom: 48px !important; }
@@ -269,7 +274,7 @@ img { max-width: 100%; display: block; }
 }
 .rush-tile:hover i, .rush-tile:focus-visible i { color: #fff; transform: scale(1.1); }
 .rush-links a.rush-tile:active { transform: translateY(-2px) scale(1.02); }
-.rush-banner { width: 100%; max-width: 1100px; margin: 20px auto 0; border-radius: 12px; }
+.rush-banner { width: 100%; height: auto; max-width: 1100px; margin: 20px auto 0; border-radius: 12px; }
 
 /* The coat of arms is portrait and transparent, so the full-bleed banner rule
    would stretch it to ~1400px tall. Height-constrained and centred instead, with
