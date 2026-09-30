@@ -1,7 +1,6 @@
 import { initLayout, refreshAnimations, countUp, typeText, tilt } from './common.js';
 
-const introPlaying = !document.documentElement.classList.contains('intro-done');
-initLayout();
+const introPlaying = initLayout();
 
 // Hero: retype the tagline that is already in the HTML, then parallax the background.
 typeText(document.getElementById('hero-tagline'), {

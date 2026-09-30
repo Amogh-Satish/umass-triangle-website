@@ -33,17 +33,16 @@ export function initLayout() {
     toggle.setAttribute('aria-expanded', String(open));
   });
 
-  // Intro (home page only, once per browser session): the triangle draws (~1.1s),
-  // lights up, then splits into its three sides and reveals the page.
-  // The inline <head> script on index.html adds .no-intro/.intro-done on repeat visits.
+  // Intro: the triangle draws (~1.1s), lights up, then splits into its three sides
+  // and reveals the page. It runs on every load of a page that has the preloader
+  // markup, which is the home page. Skipped only for prefers-reduced-motion.
   const html = document.documentElement;
   const pre = document.getElementById('preloader');
-  const skipIntro = html.classList.contains('no-intro') || reduceMotion();
-  if (skipIntro || !pre) {
+  const playIntro = Boolean(pre) && !reduceMotion();
+  if (!playIntro) {
     pre?.remove();
     html.classList.add('intro-done');
   } else {
-    try { sessionStorage.setItem('introSeen', '1'); } catch {}
     const play = () => {
       setTimeout(() => pre.classList.add('lit'), 1100);
       setTimeout(() => { pre.classList.add('split'); html.classList.add('intro-done'); }, 1450);
@@ -53,6 +52,9 @@ export function initLayout() {
   }
 
   window.AOS?.init({ duration: 900, easing: 'ease-in-out', once: true });
+
+  // Lets callers time their own entrance animations against the intro.
+  return playIntro;
 }
 
 // Call after injecting dynamic content so scroll animations re-measure positions.

@@ -38,7 +38,6 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
 
 - [ ] **Rush pitch** — replace the bracketed blurb
 - [ ] **Interest form URL** — the `[Rush interest form]` link is currently `#`
-- [ ] **Group chat link**
 - [ ] **Email + Instagram** links in the same row
 - [ ] **Rush banner** image
 - [ ] **Countdown** — set `data-date` on `#countdown`, e.g. `data-date="2026-09-08T19:00"`
