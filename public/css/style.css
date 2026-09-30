@@ -314,20 +314,25 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); ou
 
 /* Delta T watermark. A separate layer rather than another background-image on
    .hero-bg--gradient, because CSS can't set per-layer opacity -- this way the
-   fade is one number to tune. Held at 7%: legible as a mark, nowhere near enough
-   to compete with the title sitting on top of it. */
+   fade and the blur are each one number to tune.
+
+   The blur is doing the real work: at this opacity a crisp vector edge reads as a
+   logo someone pasted behind the text, while a soft one reads as light falling on
+   a surface. Blur spreads the same ink over more area, so the opacity is nudged up
+   to compensate for the thinner core. */
 .hero-bg--gradient::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: url('../img/brand/delta-t-watermark.svg') no-repeat center 44% / auto 74%;
-  opacity: .07;
+  background: url('../img/brand/delta-t-watermark.svg') no-repeat center 45% / auto 54%;
+  opacity: .085;
+  filter: blur(7px);
 }
 
 /* On a short screen the mark crowds the text, so pull it in. */
 @media (max-height: 700px) {
-  .hero-bg--gradient::after { background-size: auto 60%; opacity: .06; }
+  .hero-bg--gradient::after { background-size: auto 45%; opacity: .075; filter: blur(6px); }
 }
 .hero-content { position: relative; z-index: 1; }
 .hero .hero-uni { color: #fff; filter: none; font-weight: 700; }
