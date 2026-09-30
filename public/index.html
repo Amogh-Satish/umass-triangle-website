@@ -2,20 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>try{if(sessionStorage.getItem('introSeen'))document.documentElement.classList.add('no-intro','intro-done')}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Triangle</title>
-  <meta name="description" content="Triangle Fraternity — the social fraternity of engineers, architects, and scientists.">
-  <link rel="icon" href="/img/logo-placeholder.svg">
+  <title>Triangle Fraternity at UMass Amherst</title>
+  <meta name="description" content="Triangle Fraternity at the University of Massachusetts Amherst — the social fraternity of engineers, architects, and scientists.">
+  <link rel="canonical" href="https://amogh-satish.github.io/umass-triangle-website/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Triangle Fraternity at UMass Amherst">
+  <meta property="og:title" content="Triangle Fraternity at UMass Amherst">
+  <meta property="og:description" content="Triangle Fraternity at the University of Massachusetts Amherst — the social fraternity of engineers, architects, and scientists.">
+  <meta property="og:url" content="https://amogh-satish.github.io/umass-triangle-website/">
+  <meta property="og:image" content="https://amogh-satish.github.io/umass-triangle-website/img/brand/delta-t.svg">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="img/brand/delta-t.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css" rel="stylesheet">
-  <link href="/css/style.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Triangle Fraternity at UMass Amherst",
+    "alternateName": "UMass Triangle",
+    "url": "https://amogh-satish.github.io/umass-triangle-website/",
+    "logo": "https://amogh-satish.github.io/umass-triangle-website/img/brand/delta-t.svg",
+    "description": "The social fraternity of engineers, architects, and scientists at the University of Massachusetts Amherst.",
+    "parentOrganization": { "@type": "Organization", "name": "Triangle Fraternity", "url": "https://www.triangle.org/" },
+    "location": {
+      "@type": "Place",
+      "name": "University of Massachusetts Amherst",
+      "address": { "@type": "PostalAddress", "addressLocality": "Amherst", "addressRegion": "MA", "addressCountry": "US" }
+    }
+  }
+  </script>
+  <script>try{if(sessionStorage.getItem('introSeen'))document.documentElement.classList.add('no-intro','intro-done')}catch(e){}</script>
   <div id="preloader" aria-hidden="true">
     <svg class="tri" viewBox="0 0 100 90" width="150" height="135">
       <line class="side s1" x1="50" y1="6" x2="94" y2="84"/>
@@ -23,25 +50,113 @@
       <line class="side s3" x1="6" y1="84" x2="50" y2="6"/>
     </svg>
   </div>
+  <div class="scroll-progress" id="scroll-progress"></div>
+  <header class="site-header" id="header">
+    <a href="index.html" class="logo"><img src="img/brand/delta-t.svg" alt="" width="200" height="177"><h1>UMass Triangle</h1></a>
+    <nav class="navbar" id="navbar">
+      <ul class="navbar-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="rush.html">Rush</a></li>
+        <li><a href="address.html">Presidential Address</a></li>
+      </ul>
+    </nav>
+    <div class="header-social">
+      <!-- TODO: add real links, then uncomment.
+      <a href="https://instagram.com/HANDLE" aria-label="Instagram" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>
+      <a href="mailto:CHAPTER@umass.edu" aria-label="Email"><i class="bi bi-envelope"></i></a>
+      -->
+    </div>
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu" aria-expanded="false"><i class="bi bi-list"></i></button>
+  </header>
+
   <section class="hero" id="hero">
-    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-bg" id="hero-bg" style="background-image:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('img/placeholder/hero.svg')"></div>
     <div class="hero-content">
-      <h2><span class="hero-anim" style="--d:0s" id="hero-chapter"></span><br><span class="hero-anim hero-uni" style="--d:.15s" id="hero-university"></span></h2>
-      <div class="hero-subtitle hero-anim" style="--d:.35s"><span id="hero-tagline"></span><span class="caret" aria-hidden="true"></span></div>
-      <div class="hero-anim" style="--d:.55s"><a href="/rush" class="btn-accent">Rush Triangle</a></div>
+      <h2><span class="hero-anim" style="--d:0s">Triangle Fraternity</span><br><span class="hero-anim hero-uni" style="--d:.15s">University of Massachusetts Amherst</span></h2>
+      <div class="hero-subtitle hero-anim" style="--d:.35s"><span id="hero-tagline">The Social Fraternity of Engineers, Architects, and Scientists</span><span class="caret" aria-hidden="true"></span></div>
+      <div class="hero-anim" style="--d:.55s"><a href="rush.html" class="btn-accent">Rush Triangle</a></div>
     </div>
     <a href="#stats" class="scroll-cue hero-anim" style="--d:.9s" aria-label="Scroll down"><i class="bi bi-chevron-double-down"></i></a>
   </section>
 
   <main>
-    <section class="stats" id="stats"></section>
+    <section class="stats" id="stats">
+      <div class="stat" data-aos="fade-up" data-aos-delay="0">
+        <div class="num">[XX]</div><div class="lbl">Active Brothers</div><div class="bar"></div>
+      </div>
+      <div class="stat" data-aos="fade-up" data-aos-delay="100">
+        <div class="num">[YYYY]</div><div class="lbl">Chapter Founded</div><div class="bar"></div>
+      </div>
+      <div class="stat" data-aos="fade-up" data-aos-delay="200">
+        <div class="num">[X.XX]</div><div class="lbl">Chapter GPA</div><div class="bar"></div>
+      </div>
+      <div class="stat" data-aos="fade-up" data-aos-delay="300">
+        <div class="num">[XX]</div><div class="lbl">Service Hours / Semester</div><div class="bar"></div>
+      </div>
+    </section>
+
     <section class="gallery">
-      <div class="gallery-grid" id="gallery-grid"></div>
+      <div class="gallery-grid" id="gallery-grid">
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 1 caption]" data-type="image" data-aos="fade-up" data-aos-delay="0">
+          <img src="img/placeholder/photo.svg" alt="[Photo 1 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 1 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 2 caption]" data-type="image" data-aos="fade-up" data-aos-delay="90">
+          <img src="img/placeholder/photo.svg" alt="[Photo 2 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 2 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 3 caption]" data-type="image" data-aos="fade-up" data-aos-delay="180">
+          <img src="img/placeholder/photo.svg" alt="[Photo 3 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 3 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 4 caption]" data-type="image" data-aos="fade-up" data-aos-delay="270">
+          <img src="img/placeholder/photo.svg" alt="[Photo 4 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 4 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 5 caption]" data-type="image" data-aos="fade-up" data-aos-delay="0">
+          <img src="img/placeholder/photo.svg" alt="[Photo 5 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 5 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 6 caption]" data-type="image" data-aos="fade-up" data-aos-delay="90">
+          <img src="img/placeholder/photo.svg" alt="[Photo 6 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 6 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 7 caption]" data-type="image" data-aos="fade-up" data-aos-delay="180">
+          <img src="img/placeholder/photo.svg" alt="[Photo 7 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 7 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 8 caption]" data-type="image" data-aos="fade-up" data-aos-delay="270">
+          <img src="img/placeholder/photo.svg" alt="[Photo 8 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 8 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 9 caption]" data-type="image" data-aos="fade-up" data-aos-delay="0">
+          <img src="img/placeholder/photo.svg" alt="[Photo 9 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 9 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 10 caption]" data-type="image" data-aos="fade-up" data-aos-delay="90">
+          <img src="img/placeholder/photo.svg" alt="[Photo 10 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 10 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 11 caption]" data-type="image" data-aos="fade-up" data-aos-delay="180">
+          <img src="img/placeholder/photo.svg" alt="[Photo 11 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 11 caption]</span></div>
+        </a>
+        <a class="gallery-item glightbox" href="img/placeholder/photo.svg" data-title="[Photo 12 caption]" data-type="image" data-aos="fade-up" data-aos-delay="270">
+          <img src="img/placeholder/photo.svg" alt="[Photo 12 caption]" width="800" height="600" loading="lazy">
+          <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>[Photo 12 caption]</span></div>
+        </a>
+      </div>
     </section>
   </main>
+  <footer class="site-footer">
+    <div>&copy; 2026 <strong>UMass Triangle</strong>. All Rights Reserved</div>
+    <div>[Designed by Name '27; Maintained by Name '28]</div>
+  </footer>
+  <a href="#" class="scroll-top" id="scroll-top" aria-label="Back to top"><i class="bi bi-arrow-up-short"></i></a>
 
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
-  <script type="module" src="/js/home.js"></script>
+  <script type="module" src="js/home.js"></script>
 </body>
 </html>

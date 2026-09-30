@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="100%" height="100%" fill="#2a2b2f"/>
+  <path fill="#3a3c41" fill-rule="evenodd" transform="translate(870 360) scale(.9000)" d="M100 0 L199 177 L126 177 L126 159 L169 159 L144 114 L109 114 L109 177 L1 177 Z M100 36 L66 96 L134 96 Z M57 114 L31 159 L91 159 L91 114 Z"/>
+  <text x="50%" y="720" fill="#8b8d93" font-family="Inter,Arial,sans-serif" font-size="54.0" text-anchor="middle">Hero photo</text>
+</svg>

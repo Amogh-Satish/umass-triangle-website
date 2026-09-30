@@ -1,78 +1,23 @@
-// Shared layout: header, footer, theme, preloader, scroll-top.
-export const esc = (s) =>
-  String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+// Shared behavior for the static site.
+//
+// Content lives in the HTML, not in JavaScript. This file only enhances what is
+// already on the page: the header, the intro, scroll effects and the small
+// animations. Every page is fully readable with JavaScript disabled.
 
-export async function api(url, opts = {}) {
-  const res = await fetch(url, {
-    ...opts,
-    headers: opts.body && !(opts.body instanceof FormData) ? { 'Content-Type': 'application/json', ...opts.headers } : opts.headers,
-  });
-  const data = res.headers.get('content-type')?.includes('json') ? await res.json() : await res.text();
-  if (!res.ok) throw new Error(data?.error || `Request failed (${res.status})`);
-  return data;
-}
+const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Treat "[...]" placeholder URLs as unset so we don't render broken links.
-const realUrl = (u) => (u && !/^\[.*\]$/.test(u) ? u : '');
-
-const NAV = [
-  { id: 'home', href: '/', label: 'Home' },
-  { id: 'members', href: '/members', label: 'Members' },
-  { id: 'rush', href: '/rush', label: 'Rush' },
-  { id: 'address', href: '/address', label: 'Presidential Address' },
-];
-
-export async function initLayout(active) {
-  const site = await api('/api/site');
-
-  const root = document.documentElement.style;
-  if (site.theme?.accent) root.setProperty('--accent', site.theme.accent);
-  if (site.theme?.background) root.setProperty('--bg', site.theme.background);
-  if (site.theme?.surface) root.setProperty('--surface', site.theme.surface);
-
-  document.title = active === 'home' ? site.siteTitle : `${NAV.find((n) => n.id === active)?.label ?? ''} · ${site.siteTitle}`;
-  const icon = document.querySelector('link[rel=icon]') || document.head.appendChild(Object.assign(document.createElement('link'), { rel: 'icon' }));
-  icon.href = site.logo;
-
-  const s = site.social || {};
-  const socials = [
-    ['instagram', 'bi-instagram', realUrl(s.instagram)],
-    ['facebook', 'bi-facebook', realUrl(s.facebook)],
-    ['linkedin', 'bi-linkedin', realUrl(s.linkedin)],
-    ['email', 'bi-envelope', realUrl(s.email) && `mailto:${s.email}`],
-  ].filter(([, , url]) => url);
-
-  document.body.insertAdjacentHTML('afterbegin', `
-    <header class="site-header" id="header">
-      <a href="/" class="logo"><img src="${esc(site.logo)}" alt=""><h1>${esc(site.siteTitle)}</h1></a>
-      <nav class="navbar" id="navbar">
-        <ul class="navbar-links">
-          ${NAV.map((n) => `<li><a href="${n.href}" class="${n.id === active ? 'active' : ''}">${n.label}</a></li>`).join('')}
-        </ul>
-      </nav>
-      <div class="header-social">
-        ${socials.map(([name, ic, url]) => `<a href="${esc(url)}" aria-label="${name}" target="_blank" rel="noopener"><i class="bi ${ic}"></i></a>`).join('')}
-      </div>
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu"><i class="bi bi-list"></i></button>
-    </header>`);
-
-  document.body.insertAdjacentHTML('beforeend', `
-    <footer class="site-footer">
-      <div>&copy; ${new Date().getFullYear()} <strong>${esc(site.siteTitle)}</strong>. All Rights Reserved</div>
-      <div>${esc(site.footer?.credits || '')}</div>
-    </footer>
-    <a href="#" class="scroll-top" id="scroll-top" aria-label="Back to top"><i class="bi bi-arrow-up-short"></i></a>`);
-
-  document.body.insertAdjacentHTML('afterbegin', '<div class="scroll-progress" id="scroll-progress"></div>');
+export function initLayout() {
   const header = document.getElementById('header');
   const top = document.getElementById('scroll-top');
   const progress = document.getElementById('scroll-progress');
+  const nav = document.getElementById('navbar');
+
   let lastY = scrollY;
   const onScroll = () => {
     const y = scrollY;
     header.classList.toggle('scrolled', y > 60);
     // hide the header while scrolling down, bring it back on any scroll up
-    header.classList.toggle('hidden', y > 300 && y > lastY && !document.getElementById('navbar').classList.contains('open'));
+    header.classList.toggle('hidden', y > 300 && y > lastY && !nav.classList.contains('open'));
     top.classList.toggle('show', y > 100);
     const max = document.documentElement.scrollHeight - innerHeight;
     progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
@@ -81,11 +26,11 @@ export async function initLayout(active) {
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  const nav = document.getElementById('navbar');
   const toggle = document.getElementById('mobile-toggle');
   toggle.addEventListener('click', () => {
     const open = nav.classList.toggle('open');
     toggle.innerHTML = `<i class="bi ${open ? 'bi-x' : 'bi-list'}"></i>`;
+    toggle.setAttribute('aria-expanded', String(open));
   });
 
   // Intro (home page only, once per browser session): the triangle draws (~1.1s),
@@ -93,7 +38,7 @@ export async function initLayout(active) {
   // The inline <head> script on index.html adds .no-intro/.intro-done on repeat visits.
   const html = document.documentElement;
   const pre = document.getElementById('preloader');
-  const skipIntro = html.classList.contains('no-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const skipIntro = html.classList.contains('no-intro') || reduceMotion();
   if (skipIntro || !pre) {
     pre?.remove();
     html.classList.add('intro-done');
@@ -108,13 +53,10 @@ export async function initLayout(active) {
   }
 
   window.AOS?.init({ duration: 900, easing: 'ease-in-out', once: true });
-  return site;
 }
 
 // Call after injecting dynamic content so scroll animations re-measure positions.
 export const refreshAnimations = () => window.AOS?.refreshHard();
-
-const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Subtle 3D tilt that follows the pointer, plus a glare highlight. Mouse/pen only.
 export function tilt(els, max = 8) {
@@ -134,10 +76,12 @@ export function tilt(els, max = 8) {
   }
 }
 
-// Counts a number up from 0 when it scrolls into view. Non-numeric values (e.g. "[XX]") show as-is.
-export function countUp(el, text, duration = 1600) {
-  const m = String(text).match(/^(\D*)([\d,]*\.?\d+)(.*)$/);
-  if (!m || reduceMotion()) { el.textContent = text; return; }
+// Counts a number up from 0 when it scrolls into view. The final value is already
+// in the HTML; this only animates toward it. Non-numeric values (e.g. "[XX]") stay as-is.
+export function countUp(el, duration = 1600) {
+  const text = el.textContent.trim();
+  const m = text.match(/^(\D*)([\d,]*\.?\d+)(.*)$/);
+  if (!m || reduceMotion()) return;
   const [, pre, numStr, post] = m;
   const target = parseFloat(numStr.replace(/,/g, ''));
   const decimals = (numStr.split('.')[1] || '').length;
@@ -163,9 +107,10 @@ export function countUp(el, text, duration = 1600) {
   }, { threshold: 0.4 }).observe(el);
 }
 
-// Types text into an element one character at a time.
-export function typeText(el, text, { delay = 0, speed = 38, caret } = {}) {
-  if (reduceMotion()) { el.textContent = text; caret?.classList.add('gone'); return; }
+// Retypes text that is already in the element, one character at a time.
+export function typeText(el, { delay = 0, speed = 38, caret } = {}) {
+  const text = el.textContent.trim();
+  if (reduceMotion() || !text) { caret?.classList.add('gone'); return; }
   el.textContent = '';
   let i = 0;
   setTimeout(function tick() {

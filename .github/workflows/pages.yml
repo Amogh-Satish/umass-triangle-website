@@ -1,0 +1,40 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # public/ is the site root. The admin dashboard is server-only and is not
+      # published: it talks to the Express API, which does not exist on Pages.
+      - name: Stage site
+        run: |
+          mkdir -p _site
+          cp -r public/. _site/
+          rm -f _site/admin.html _site/js/admin.js
+          rm -rf _site/uploads
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4

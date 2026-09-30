@@ -1,5 +1,5 @@
 {
-  "_comment": "Every value in [brackets] is a placeholder. Edit here or from /admin -> Site Settings.",
+  "_comment": "NOT USED BY THE LIVE SITE. The published site is static; content is edited directly in public/*.html. This file only feeds the legacy Express server. See README.",
   "siteTitle": "UMass Triangle",
   "chapterName": "Δ Chapter",
   "university": "University of Massachusetts Amherst",

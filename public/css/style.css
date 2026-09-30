@@ -1,6 +1,9 @@
 /* Theme colors are overridden at runtime from config/site.json (theme.*) */
 :root {
-  --accent: #881c1c;
+  /* Triangle Fraternity brand red, sampled from nationals' official Delta T asset. */
+  --accent: #D2343E;
+  /* Lightened for inline links: #D2343E on --bg is only 3.6:1, this clears AA at 5.2:1. */
+  --accent-link: #E4606A;
   --bg: #161718;
   --surface: #222326;
   --surface-2: #2a2b2f;
@@ -21,7 +24,7 @@ body {
   font-family: var(--font-body);
   line-height: 1.6;
 }
-a { color: var(--accent); text-decoration: none; transition: color .2s; }
+a { color: var(--accent-link); text-decoration: none; transition: color .2s; }
 a:hover { color: #fff; }
 img { max-width: 100%; display: block; }
 

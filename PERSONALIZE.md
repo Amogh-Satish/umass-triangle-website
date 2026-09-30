@@ -1,30 +1,67 @@
 # Personalization checklist
 
-Everything below is a placeholder right now. Most of it can be done from **/admin** without touching code. The admin **Checklist** tab tracks what's left.
+The site is static: everything below is edited **directly in the HTML** in `public/`.
+There is no admin panel and no database behind the live site — see the README for why.
 
-## Site Settings (admin → Site Settings, or `config/site.json`)
-- [ ] **Site title**: shown in the header next to the logo
-- [ ] **Chapter name**: e.g. "Alpha Beta Chapter" (big highlighted hero text)
-- [ ] **University**: already set to "University of Massachusetts Amherst"; change if needed
-- [ ] **Logo**: upload the chapter crest (PNG/SVG, transparent background). It's also used as the browser-tab icon.
-- [ ] **Hero image**: big home-page background (house, composite, or drone shot; landscape, ~1920px wide)
-- [ ] **Rush banner**: wide image at the bottom of the Rush page
-- [ ] **Theme colors**: `accent` is UMass maroon `#881c1c` by default; change if you like
-- [ ] **Social links**: Instagram, Facebook, LinkedIn, chapter email (blank or `[bracketed]` values are hidden)
-- [ ] **Stats**: the numbers on the home page that count up (active brothers, year founded, GPA, service hours). Edit, add or remove them.
-- [ ] **E-Board term**: e.g. "Fall 2026"
-- [ ] **Rush**: blurb, season, and links (group chat, external form, etc.)
-- [ ] **Rush date**: set it to show a live countdown on the Rush page (hidden when blank or once it passes)
-- [ ] **Footer credits**
+Find everything still outstanding at any time:
 
-## Content (admin tabs)
-- [ ] **Gallery**: replace the 12 placeholder photos (use "Bulk upload photos", then add captions)
-- [ ] **E-Board**: names, positions, headshots (square photos look best)
-- [ ] **Members**: chairholders (with a role) and active members (blank role)
-- [ ] **Presidential Address**: the letter and signature
+```bash
+grep -rn '\[' public/*.html | grep -v '<!--'
+```
 
-## Optional code-level changes
-- [ ] Loading animation colors and timing: `public/css/style.css` (the "preloader" section)
-- [ ] Nav items / page names: `NAV` in `public/js/common.js`
-- [ ] Rush form fields: `public/rush.html` and the `/api/rush` handler in `server/index.js`
-- [ ] Meta description for search engines: the `<meta name="description">` tag in each `public/*.html`
+## Identity — all five pages
+
+The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
+`address.html` and `404.html`. Change one, change all five.
+
+- [ ] **Chapter email + Instagram** — uncomment the `header-social` block and fill in
+      the real links
+- [ ] **Footer credits** — replace `[Designed by Name '27; Maintained by Name '28]`
+
+## Home (`public/index.html`)
+
+- [ ] **Hero background** — swap `img/placeholder/hero.svg` for a real landscape photo
+      (~1920px wide: house, composite, or a drone shot)
+- [ ] **Stats** — `[XX]` active brothers, `[YYYY]` founded, `[X.XX]` GPA, `[XX]` service
+      hours. They count up on scroll; non-numeric values just display as-is.
+- [ ] **Gallery** — replace the 12 placeholder entries with real photos and captions.
+      Drop files in `public/img/`. Captions are also the `alt` text, so write them for
+      a person who can't see the photo.
+
+## Members (`public/members.html`)
+
+- [ ] **E-board term** — `[Semester Year]`
+- [ ] **E-board** — 8 `[Name]` entries plus square headshots
+- [ ] **Chairholders and active members** — names and class years
+
+## Rush (`public/rush.html`)
+
+- [ ] **Rush pitch** — replace the bracketed blurb
+- [ ] **Interest form URL** — the `[Rush interest form]` link is currently `#`
+- [ ] **Group chat link**
+- [ ] **Email + Instagram** links in the same row
+- [ ] **Rush banner** image
+- [ ] **Countdown** — set `data-date` on `#countdown`, e.g. `data-date="2026-09-08T19:00"`
+
+## Presidential address (`public/address.html`)
+
+- [ ] The letter body and the signature
+
+## Brand and metadata
+
+- [ ] **Coat of Arms** — request production artwork from `communications@triangle.org`
+      if you want the crest on the site (the Delta T is already vectorized)
+- [ ] **Base URL** — the canonical/Open Graph/sitemap URLs assume
+      `https://amogh-satish.github.io/umass-triangle-website`. On a custom domain run
+      `tools/set-base-url.sh https://your-domain.org`
+- [ ] **Google Search Console** — verify the site and submit `sitemap.xml` after the
+      first deploy
+- [ ] **Backlinks** — get listed on the UMass Greek life directory and `triangle.org`
+
+## Before it goes public
+
+- [ ] No `[placeholder]` text left anywhere
+- [ ] Every photo is one the chapter has the right to publish, and everyone pictured is
+      fine with it being on a public, indexed page
+- [ ] Names and headshots of members: confirm each brother consents to being listed
+- [ ] Exec board has signed off on the copy
