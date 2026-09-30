@@ -9,6 +9,6 @@ Chapter website for Triangle Fraternity at UMass Amherst. Owner: Amogh Satish ('
 - Site settings (names, colors, links, stats, rush date, footer) live in `config/site.json`.
   Gallery / e-board / members / address letter / rush sign-ups live in `data/site.db` (gitignored, local only).
 - Placeholders are written as `[like this]`; admin → Checklist lists what's left. See PERSONALIZE.md.
-- Intro animation (triangle draws, then splits three ways) is home page only, once per browser session:
+- Intro animation (triangle draws, then splits three ways) is home page only; plays on open and on refresh, skipped when clicking Home from another page:
   markup in `public/index.html`, styles in the preloader section of `public/css/style.css`, timing in `public/js/common.js`.
 - Design is modeled on the Michigan chapter's site layout, but don't copy their photos, names or text.

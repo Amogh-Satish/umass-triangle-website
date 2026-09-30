@@ -88,9 +88,9 @@ export async function initLayout(active) {
     toggle.innerHTML = `<i class="bi ${open ? 'bi-x' : 'bi-list'}"></i>`;
   });
 
-  // Intro (home page only, once per browser session): the triangle draws (~1.1s),
+  // Intro (home page only; plays on open and refresh): the triangle draws (~1.1s),
   // lights up, then splits into its three sides and reveals the page.
-  // The inline <head> script on index.html adds .no-intro/.intro-done on repeat visits.
+  // The inline <head> script on index.html adds .no-intro/.intro-done when arriving from another page of the site.
   const html = document.documentElement;
   const pre = document.getElementById('preloader');
   const skipIntro = html.classList.contains('no-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -98,7 +98,6 @@ export async function initLayout(active) {
     pre?.remove();
     html.classList.add('intro-done');
   } else {
-    try { sessionStorage.setItem('introSeen', '1'); } catch {}
     const play = () => {
       setTimeout(() => pre.classList.add('lit'), 1100);
       setTimeout(() => { pre.classList.add('split'); html.classList.add('intro-done'); }, 1450);

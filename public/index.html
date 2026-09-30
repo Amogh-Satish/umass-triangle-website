@@ -2,7 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>try{if(sessionStorage.getItem('introSeen'))document.documentElement.classList.add('no-intro','intro-done')}catch(e){}</script>
+  <script>
+    // Play the triangle intro when the site is opened or refreshed; skip it only when
+    // arriving here by clicking a link on another page of this site.
+    try {
+      var nav = performance.getEntriesByType('navigation')[0];
+      var fromOwnPage = document.referrer && new URL(document.referrer).origin === location.origin;
+      if (fromOwnPage && (!nav || nav.type !== 'reload')) document.documentElement.classList.add('no-intro', 'intro-done');
+    } catch (e) {}
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Triangle</title>
   <meta name="description" content="Triangle Fraternity — the social fraternity of engineers, architects, and scientists.">
