@@ -25,9 +25,7 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
 
 - [ ] **Hero background** — swap `img/placeholder/hero.svg` for a real landscape photo
       (~1920px wide: house, composite, or a drone shot)
-- [x] **Stats** — 25 active brothers, founded 2025
-- [ ] **Service hours / semester** — still `[XX]`. Counts up on scroll;
-      non-numeric values just display as-is.
+- [x] **Stats** — 25 active brothers, founded 2025, 15 service hours / semester
 - [ ] **Gallery** — replace the 12 placeholder entries with real photos and captions.
       Drop files in `public/img/`. Captions are also the `alt` text, so write them for
       a person who can't see the photo.
