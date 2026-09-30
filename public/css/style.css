@@ -37,9 +37,14 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(90% 52% at 50% 0%, rgba(226, 232, 242, .085) 0%, transparent 62%),
-    radial-gradient(70% 45% at 88% 12%, rgba(210, 52, 62, .07) 0%, transparent 60%),
-    linear-gradient(180deg, #191B20 0%, #141519 55%, #101114 100%);
+    radial-gradient(85% 48% at 50% 0%, rgba(226, 232, 242, .075) 0%, transparent 60%),
+    /* two red anchors on a diagonal rather than one centred wash, so the colour
+       stays present while scrolling without ever pooling in the middle behind text */
+    radial-gradient(56% 40% at 86% 7%,
+      rgba(210, 52, 62, .125) 0%, rgba(198, 48, 60, .04) 45%, transparent 68%),
+    radial-gradient(52% 38% at 10% 86%,
+      rgba(210, 52, 62, .085) 0%, transparent 64%),
+    linear-gradient(180deg, #191B20 0%, #141519 55%, #110F12 100%);
 }
 a { color: var(--accent-link); text-decoration: none; transition: color .2s; }
 a:hover { color: #fff; }
@@ -291,11 +296,20 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); ou
       #D2343E reads more saturated here than it did on the flat neutral. */
 .hero-bg--gradient {
   background:
-    radial-gradient(118% 78% at 50% -8%,
-      rgba(228, 233, 242, .19) 0%, rgba(228, 233, 242, .065) 38%, transparent 72%),
-    radial-gradient(78% 56% at 50% 108%,
-      rgba(210, 52, 62, .17) 0%, rgba(210, 52, 62, .045) 45%, transparent 70%),
-    linear-gradient(176deg, #212429 0%, #181A1F 46%, #101114 100%);
+    /* grey-white light source from the top */
+    radial-gradient(116% 74% at 50% -8%,
+      rgba(228, 233, 242, .17) 0%, rgba(228, 233, 242, .058) 38%, transparent 72%),
+    /* the bloom's hot core: small and bright, so the glow reads as a light with a
+       source rather than a red haze laid over the whole panel */
+    radial-gradient(38% 30% at 50% 105%,
+      rgba(236, 82, 92, .26) 0%, rgba(228, 68, 78, .10) 45%, transparent 72%),
+    /* the falloff, in four stops -- a 2-stop ramp banks too fast and bands */
+    radial-gradient(70% 54% at 50% 106%,
+      rgba(214, 56, 66, .30) 0%, rgba(198, 48, 60, .175) 26%,
+      rgba(168, 40, 52, .075) 50%, transparent 74%),
+    /* base ramp, bottom stop warmed a touch so the glow looks like it comes off
+       the surface instead of floating on it */
+    linear-gradient(176deg, #212429 0%, #181A1F 46%, #130F12 100%);
 }
 .hero-content { position: relative; z-index: 1; }
 .hero .hero-uni { color: #fff; filter: none; font-weight: 700; }
