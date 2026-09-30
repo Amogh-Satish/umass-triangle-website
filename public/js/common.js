@@ -83,7 +83,18 @@ export function tilt(els, max = 8) {
 export function countUp(el, duration = 1600) {
   const text = el.textContent.trim();
   const m = text.match(/^(\D*)([\d,]*\.?\d+)(.*)$/);
-  if (!m || reduceMotion()) return;
+
+  // The underline bar draws off the .seen class, so it has to be set even when
+  // there is no number to animate. Bailing early here left any tile holding a
+  // placeholder -- or every tile under prefers-reduced-motion -- without its rule.
+  if (!m || reduceMotion()) {
+    new IntersectionObserver(([entry], obs) => {
+      if (!entry.isIntersecting) return;
+      obs.disconnect();
+      el.closest('.stat')?.classList.add('seen');
+    }, { threshold: 0.4 }).observe(el);
+    return;
+  }
   const [, pre, numStr, post] = m;
   const target = parseFloat(numStr.replace(/,/g, ''));
   const decimals = (numStr.split('.')[1] || '').length;
