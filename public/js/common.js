@@ -78,45 +78,59 @@ export function tilt(els, max = 8) {
   }
 }
 
-// Counts a number up from 0 when it scrolls into view. The final value is already
-// in the HTML; this only animates toward it. Non-numeric values (e.g. "[XX]") stay as-is.
+// Counts a number up when the tile scrolls into view, and again every time it
+// comes back -- scroll away and back and it replays, rather than firing once per
+// page load. The final value is already in the HTML; this only animates toward
+// it. Non-numeric values (e.g. "[XX]") stay as-is.
 export function countUp(el, duration = 1600) {
   const text = el.textContent.trim();
   const m = text.match(/^(\D*)([\d,]*\.?\d+)(.*)$/);
+  const stat = el.closest('.stat');
 
-  // The underline bar draws off the .seen class, so it has to be set even when
-  // there is no number to animate. Bailing early here left any tile holding a
-  // placeholder -- or every tile under prefers-reduced-motion -- without its rule.
+  // The underline bar draws off .seen, so it is toggled even when there is no
+  // number to animate -- otherwise a placeholder tile, or any tile under
+  // prefers-reduced-motion, renders without its rule.
   if (!m || reduceMotion()) {
-    new IntersectionObserver(([entry], obs) => {
-      if (!entry.isIntersecting) return;
-      obs.disconnect();
-      el.closest('.stat')?.classList.add('seen');
+    new IntersectionObserver(([entry]) => {
+      stat?.classList.toggle('seen', entry.isIntersecting);
     }, { threshold: 0.4 }).observe(el);
     return;
   }
+
   const [, pre, numStr, post] = m;
   const target = parseFloat(numStr.replace(/,/g, ''));
   const decimals = (numStr.split('.')[1] || '').length;
   const useCommas = numStr.includes(',');
-  // Years like 1907 shouldn't get a thousands separator or count from 0.
+  // Years like 2025 shouldn't get a thousands separator or count from 0.
   const from = /^(1[89]|20)\d\d$/.test(numStr) ? target - 40 : 0;
   const fmt = (v) => {
     const s = v.toFixed(decimals);
     return pre + (useCommas ? Number(s).toLocaleString('en-US', { minimumFractionDigits: decimals }) : s) + post;
   };
-  el.textContent = fmt(from);
-  new IntersectionObserver(([entry], obs) => {
-    if (!entry.isIntersecting) return;
-    obs.disconnect();
-    el.closest('.stat')?.classList.add('seen');
+
+  let raf = 0;
+  const run = () => {
+    cancelAnimationFrame(raf);
     const t0 = performance.now();
     const step = (now) => {
       const p = Math.min((now - t0) / duration, 1);
       el.textContent = fmt(from + (target - from) * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) requestAnimationFrame(step);
+      if (p < 1) raf = requestAnimationFrame(step);
     };
-    requestAnimationFrame(step);
+    raf = requestAnimationFrame(step);
+  };
+
+  el.textContent = fmt(from);
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      stat?.classList.add('seen');
+      run();
+    } else {
+      // Rewind so the next pass starts from the beginning instead of snapping.
+      cancelAnimationFrame(raf);
+      stat?.classList.remove('seen');
+      el.textContent = fmt(from);
+    }
   }, { threshold: 0.4 }).observe(el);
 }
 
