@@ -3,7 +3,7 @@ import { spawn } from 'node:child_process';
 
 try { process.loadEnvFile('.env'); } catch {}
 
-const procs = [spawn(process.execPath, ['--watch-path=server', '--watch-path=config', 'server/index.js'], { stdio: 'inherit' })];
+const procs = [spawn(process.execPath, ['--disable-warning=ExperimentalWarning', '--watch-path=server', '--watch-path=config', 'server/index.js'], { stdio: 'inherit' })];
 if (process.env.AUTOPUSH !== 'false') procs.push(spawn(process.execPath, ['scripts/autopush.js'], { stdio: 'inherit' }));
 
 const stop = () => { procs.forEach((p) => p.kill()); process.exit(); };

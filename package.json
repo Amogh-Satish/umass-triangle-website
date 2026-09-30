@@ -6,7 +6,7 @@
   "type": "module",
   "engines": { "node": ">=22.13" },
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node --disable-warning=ExperimentalWarning server/index.js",
     "dev": "node scripts/dev.js",
     "autopush": "node scripts/autopush.js",
     "test": "node --test test/*.test.js"

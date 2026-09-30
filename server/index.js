@@ -233,5 +233,13 @@ app.use((err, req, res, next) => {
 export default app;
 
 if (process.argv[1] === new URL(import.meta.url).pathname) {
-  app.listen(PORT, () => console.log(`Site running at http://localhost:${PORT}  (admin: /admin)`));
+  app.listen(PORT, (err) => {
+    if (err) {
+      console.error(err.code === 'EADDRINUSE'
+        ? `\nPort ${PORT} is already in use: the site is probably already running in another window.\nClose that window (or press Control+C in it), then try again.\n`
+        : err);
+      process.exit(1);
+    }
+    console.log(`Site running at http://localhost:${PORT}  (admin: /admin)`);
+  });
 }
