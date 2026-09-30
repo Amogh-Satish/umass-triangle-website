@@ -37,8 +37,9 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
       President, Vice President, Secretary, Director of Finance, Recruitment,
       Philanthropy, Risk Management, Innovations, Outreach, External Affairs,
       Education, Social Media, DEI
-- [ ] **E-board names + headshots** — Nihaal Thakran and Anurag Dasgupta are in
-      (Directors of Recruitment); the other 12 are still `[Name]` on a placeholder
+- [ ] **E-board names + headshots** — named so far: Harsith Thokala (President),
+      Amogh Satish (Finance), Nihaal Thakran and Anurag Dasgupta (Recruitment).
+      Nihaal has a headshot; the other 10 cards are still `[Name]` on a placeholder
       headshot. Square photos look best. Drop them in `public/img/eboard/`.
 - [ ] **Active members** — names and class years
 
