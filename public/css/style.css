@@ -232,6 +232,46 @@ img { max-width: 100%; display: block; }
 .swiper-pagination-bullet { background: #fff; opacity: .4; }
 .swiper-pagination-bullet-active { background: var(--accent); opacity: 1; }
 
+/* Carousel arrows. Swiper ships its own sizing, glyph and vertical centring on
+   .swiper-button-next/prev, so each of those is overridden rather than just
+   added to: ::after carries its built-in icon, and margin-top does its centring. */
+.swiper-nav {
+  position: absolute;
+  z-index: 10;
+  /* the .swiper has 48px of bottom padding for the pagination row, so a plain
+     50% sits visibly low against the cards */
+  top: calc(50% - 24px);
+  transform: translateY(-50%);
+  margin-top: 0;
+  width: 42px; height: 42px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .45);
+  border: 1px solid rgba(255, 255, 255, .22);
+  backdrop-filter: blur(6px);
+  color: #fff; font-size: 1.05rem; line-height: 1;
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.swiper-nav::after { content: none; }
+.swiper-nav.swiper-button-prev { left: 10px; right: auto; }
+.swiper-nav.swiper-button-next { right: 10px; left: auto; }
+.swiper-nav:hover, .swiper-nav:focus-visible {
+  background: var(--accent); border-color: var(--accent);
+  transform: translateY(-50%) scale(1.08);
+}
+.swiper-nav.swiper-button-disabled { opacity: .3; pointer-events: none; }
+
+@media (max-width: 640px) {
+  .swiper-nav { width: 36px; height: 36px; font-size: .95rem; }
+  .swiper-nav.swiper-button-prev { left: 2px; }
+  .swiper-nav.swiper-button-next { right: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .swiper-nav { transition: none; }
+  .swiper-nav:hover, .swiper-nav:focus-visible { transform: translateY(-50%); }
+}
+
 /* member list */
 .member-list { max-width: 560px; margin: 0 auto; }
 .member-list h2 { font-size: 1.6rem; font-weight: 700; margin: 0 0 18px; text-align: center; }

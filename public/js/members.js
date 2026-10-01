@@ -15,6 +15,7 @@ new window.Swiper('#eboard-swiper', {
   slidesPerView: 1.2,
   spaceBetween: 24,
   pagination: { el: '.swiper-pagination', clickable: true },
+  navigation: { prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next' },
   breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
 });
 tilt(document.querySelectorAll('.eboard-card'));
