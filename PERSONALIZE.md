@@ -50,7 +50,7 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
 
 ## Presidential address (`public/address.html`)
 
-- [ ] The letter body and the signature
+- [x] Letter and signature — Harsith Thokala, President
 
 ## Brand and metadata
 
