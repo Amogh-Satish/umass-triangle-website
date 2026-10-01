@@ -17,7 +17,7 @@ before(async () => {
 after(() => { server.close(); fs.rmSync(tmp, { recursive: true, force: true }); });
 
 test('public pages render', async () => {
-  for (const p of ['/', '/members', '/rush', '/address', '/admin']) {
+  for (const p of ['/', '/members', '/rush', '/about', '/admin']) {
     const r = await fetch(base + p);
     assert.equal(r.status, 200, p);
   }
