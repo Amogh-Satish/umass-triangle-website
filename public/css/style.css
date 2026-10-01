@@ -341,8 +341,8 @@ img { max-width: 100%; display: block; }
 /* Built on <dialog>, so focus trapping, Escape and the backdrop are the
    platform's rather than hand-rolled. */
 .member-modal {
-  width: min(430px, calc(100vw - 32px));
-  padding: 30px 28px 28px;
+  width: min(660px, calc(100vw - 32px));
+  padding: 34px 36px 32px;
   border: 1px solid var(--border); border-radius: 18px;
   background: var(--surface); color: var(--text);
   box-shadow: 0 30px 70px rgba(0, 0, 0, .6);
@@ -363,15 +363,19 @@ img { max-width: 100%; display: block; }
 }
 .mm-close:hover, .mm-close:focus-visible { color: #fff; background: var(--surface-2); border-color: var(--border); }
 
+/* Text left, portrait right. The photo column is a fixed track so the bio always
+   gets the remaining width instead of the two fighting over it. */
+.mm-body { display: grid; grid-template-columns: 1fr 196px; gap: 30px; align-items: start; }
+.mm-text { min-width: 0; text-align: left; }
 .mm-photo {
-  display: block; width: 116px; height: 116px; margin: 0 auto 18px;
-  border-radius: 50%; object-fit: cover;
-  border: 2px solid var(--border); background: var(--surface-2);
+  display: block; width: 196px; height: 196px;
+  border-radius: 14px; object-fit: cover;
+  border: 1px solid var(--border); background: var(--surface-2);
 }
-.mm-name { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; margin: 0; text-align: center; }
-.mm-meta { margin: 6px 0 0; text-align: center; font-size: .88rem; color: var(--accent-link); letter-spacing: .02em; }
-.mm-bio { margin: 18px 0 0; line-height: 1.65; color: rgba(255, 255, 255, .84); text-align: center; }
-.mm-links { display: flex; gap: 10px; justify-content: center; margin-top: 22px; }
+.mm-name { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; margin: 0; line-height: 1.15; }
+.mm-meta { margin: 8px 0 0; font-size: .9rem; color: var(--accent-link); letter-spacing: .02em; }
+.mm-bio { margin: 18px 0 0; line-height: 1.65; color: rgba(255, 255, 255, .84); }
+.mm-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .mm-links[hidden] { display: none; }
 .mm-link {
   display: inline-flex; align-items: center; gap: 8px;
@@ -381,6 +385,16 @@ img { max-width: 100%; display: block; }
   transition: background-color .18s ease, border-color .18s ease;
 }
 .mm-link:hover, .mm-link:focus-visible { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* Narrow: stack, photo first. order:-1 keeps the portrait above the name without
+   reordering the DOM, so the heading still comes first for screen readers. */
+@media (max-width: 560px) {
+  .member-modal { padding: 28px 22px 24px; }
+  .mm-body { grid-template-columns: 1fr; gap: 20px; }
+  .mm-photo { order: -1; width: 148px; height: 148px; margin: 0 auto; }
+  .mm-text { text-align: center; }
+  .mm-links { justify-content: center; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .member-modal { transition: none; opacity: 1; transform: none; }
