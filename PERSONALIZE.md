@@ -38,10 +38,12 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
       Philanthropy, Risk Management, Innovations, Outreach, External Affairs,
       Education, Social Media, DEI
 - [ ] **E-board names + headshots** — named so far: Harsith Thokala (President),
-      Amogh Satish (Finance), Nihaal Thakran and Anurag Dasgupta (Recruitment).
+      Amogh Satish (Finance), Aarav Singh (Vice President), Nihaal Thakran and
+      Anurag Dasgupta (Recruitment).
       Nihaal has a headshot; the other 10 cards are still `[Name]` on a placeholder
       headshot. Square photos look best. Drop them in `public/img/eboard/`.
-- [ ] **Active members** — 25 rows, all `[Member N] ['YY]`. Each has a photo that
+- [ ] **Active members** — 25 rows; 5 named (Harsith, Aarav, Nihaal, Amogh,
+      Anurag), 20 still `[Member N] ['YY]`. Each has a photo that
       opens in the lightbox: drop a square image in `public/img/members/` and point
       BOTH the `<a href>` and the `<img src>` at it.
 - [ ] **Terms** — the picker holds only Fall 2026. Add one `<li>` in the
