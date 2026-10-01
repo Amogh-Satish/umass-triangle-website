@@ -43,9 +43,14 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
       Nihaal has a headshot; the other 10 cards are still `[Name]` on a placeholder
       headshot. Square photos look best. Drop them in `public/img/eboard/`.
 - [ ] **Active members** — 25 rows; 5 named (Harsith, Aarav, Nihaal, Amogh,
-      Anurag), 20 still `[Member N] ['YY]`. Each has a photo that
-      opens in the lightbox: drop a square image in `public/img/members/` and point
-      BOTH the `<a href>` and the `<img src>` at it.
+      Anurag), 20 still `[Member N] ['YY]`. Each card opens a bio modal. Per
+      member, in `members.html`:
+      - photo: square image in `public/img/members/`, set as the `<img src>`
+      - `.md-major` — e.g. "Computer Science"
+      - `.md-bio` — a sentence or two in their own voice
+      - LinkedIn / Instagram: add `<a class="md-linkedin">` or
+        `<a class="md-instagram">` **only** for members who have one. Leave them
+        out entirely otherwise — the modal hides the row when neither exists.
 - [ ] **Terms** — the picker holds only Fall 2026. Add one `<li>` in the
       `term-menu` list per term; `aria-selected="true"` marks the active one.
 

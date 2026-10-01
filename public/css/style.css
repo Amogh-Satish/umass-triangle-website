@@ -282,9 +282,16 @@ img { max-width: 100%; display: block; }
   list-style: none; padding: 0; margin: 0;
   display: grid; grid-template-columns: repeat(auto-fill, minmax(226px, 1fr)); gap: 10px;
 }
-.member-grid li {
-  display: flex; align-items: center; gap: 12px; padding: 8px 14px 8px 8px;
+.member-grid li { display: flex; }
+.member-card {
+  flex: 1; display: flex; align-items: center; gap: 12px;
+  padding: 8px 14px 8px 8px; font: inherit; text-align: left; color: var(--text);
   background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.member-card:hover, .member-card:focus-visible {
+  background: var(--surface-2); border-color: rgba(255, 255, 255, .28); transform: translateY(-2px);
 }
 .member-photo {
   flex: none; display: block; width: 42px; height: 42px;
@@ -293,9 +300,9 @@ img { max-width: 100%; display: block; }
   transition: transform .18s ease, border-color .18s ease;
 }
 .member-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.member-photo:hover, .member-photo:focus-visible { transform: scale(1.09); border-color: var(--accent); }
+.member-card:hover .member-photo, .member-card:focus-visible .member-photo { border-color: var(--accent); }
 .member-name { font-weight: 600; font-size: .95rem; min-width: 0; overflow-wrap: anywhere; }
-.member-grid small { color: var(--muted); margin-left: auto; flex: none; }
+.member-card small { color: var(--muted); margin-left: auto; flex: none; }
 
 /* term picker */
 .term-select { position: relative; display: inline-block; }
@@ -329,6 +336,58 @@ img { max-width: 100%; display: block; }
 .term-menu li:not([aria-selected="true"]) i { visibility: hidden; }
 
 @media (max-width: 575px) { .member-grid { grid-template-columns: 1fr; } }
+
+/* ---------- member bio modal ---------- */
+/* Built on <dialog>, so focus trapping, Escape and the backdrop are the
+   platform's rather than hand-rolled. */
+.member-modal {
+  width: min(430px, calc(100vw - 32px));
+  padding: 30px 28px 28px;
+  border: 1px solid var(--border); border-radius: 18px;
+  background: var(--surface); color: var(--text);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .6);
+  overflow: visible;
+  opacity: 0; transform: translateY(14px) scale(.96);
+  transition: opacity .22s ease, transform .24s cubic-bezier(.2, .7, .2, 1);
+}
+.member-modal.is-open { opacity: 1; transform: none; }
+.member-modal::backdrop { background: rgba(6, 6, 8, 0); transition: background-color .24s ease; }
+.member-modal.is-open::backdrop { background: rgba(6, 6, 8, .74); backdrop-filter: blur(3px); }
+
+.mm-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; cursor: pointer; font-size: .85rem;
+  color: var(--muted); background: transparent; border: 1px solid transparent;
+  transition: color .18s ease, background-color .18s ease, border-color .18s ease;
+}
+.mm-close:hover, .mm-close:focus-visible { color: #fff; background: var(--surface-2); border-color: var(--border); }
+
+.mm-photo {
+  display: block; width: 116px; height: 116px; margin: 0 auto 18px;
+  border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--border); background: var(--surface-2);
+}
+.mm-name { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; margin: 0; text-align: center; }
+.mm-meta { margin: 6px 0 0; text-align: center; font-size: .88rem; color: var(--accent-link); letter-spacing: .02em; }
+.mm-bio { margin: 18px 0 0; line-height: 1.65; color: rgba(255, 255, 255, .84); text-align: center; }
+.mm-links { display: flex; gap: 10px; justify-content: center; margin-top: 22px; }
+.mm-links[hidden] { display: none; }
+.mm-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: 999px; text-decoration: none;
+  font-size: .85rem; font-weight: 600; color: var(--text);
+  background: var(--surface-2); border: 1px solid var(--border);
+  transition: background-color .18s ease, border-color .18s ease;
+}
+.mm-link:hover, .mm-link:focus-visible { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .member-modal { transition: none; opacity: 1; transform: none; }
+  .member-modal::backdrop { transition: none; }
+  .member-card { transition: none; }
+  .member-card:hover, .member-card:focus-visible { transform: none; }
+}
 
 /* GLightbox ships a white caption bar, which is jarring over this dark UI. Used
    by both the home gallery and the member photos. */

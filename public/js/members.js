@@ -1,4 +1,4 @@
-import { initLayout, refreshAnimations, tilt } from './common.js?v=20261001a';
+import { initLayout, refreshAnimations, tilt } from './common.js?v=20261001c';
 
 initLayout();
 
@@ -23,9 +23,76 @@ new window.Swiper('#eboard-swiper', {
 });
 tilt(document.querySelectorAll('.eboard-card'));
 
-// Member photos open in the same lightbox the home gallery uses. data-gallery
-// groups them, so the arrows step from member to member.
-window.GLightbox?.({ selector: '.member-photo', touchNavigation: true, loop: true, zoomable: true });
+// Member bio modal. Built on <dialog> so focus trapping, Escape and the backdrop
+// come from the platform rather than hand-rolled JS.
+const modal = document.getElementById('member-modal');
+
+if (modal && typeof modal.showModal === 'function') {
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let lastFocused = null;
+
+  const open = (card) => {
+    const li = card.closest('.member');
+    const detail = li.querySelector('.member-detail');
+    const photo = card.querySelector('.member-photo img');
+    const name = card.querySelector('.member-name').textContent;
+    const year = card.querySelector('small').textContent;
+    const major = detail.querySelector('.md-major')?.textContent.trim() || '';
+
+    document.getElementById('mm-photo').src = photo.getAttribute('src');
+    document.getElementById('mm-photo').alt = name;
+    document.getElementById('mm-name').textContent = name;
+    // "'29" -> "Class of 2029". A placeholder like "['YY]" has no digits to expand,
+    // so it's left as written rather than becoming "Class of 20YY".
+    const yr = year.replace(/[\[\]']/g, '').trim();
+    const classOf = /^\d{2}$/.test(yr) ? `Class of 20${yr}` : `Class of ${yr}`;
+    // Only join with a separator when both halves exist, so a missing major
+    // doesn't leave a stray bullet.
+    document.getElementById('mm-meta').textContent = [major, classOf].filter(Boolean).join(' · ');
+    document.getElementById('mm-bio').textContent = detail.querySelector('.md-bio')?.textContent.trim() || '';
+
+    const links = document.getElementById('mm-links');
+    links.innerHTML = '';
+    for (const [cls, icon, label] of [['.md-linkedin', 'bi-linkedin', 'LinkedIn'],
+                                      ['.md-instagram', 'bi-instagram', 'Instagram']]) {
+      const src = detail.querySelector(cls);
+      if (!src || !src.getAttribute('href')) continue;
+      const a = document.createElement('a');
+      a.className = 'mm-link';
+      a.href = src.getAttribute('href');
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.innerHTML = `<i class="bi ${icon}" aria-hidden="true"></i><span>${label}</span>`;
+      links.appendChild(a);
+    }
+    links.hidden = !links.children.length;
+
+    lastFocused = card;
+    modal.showModal();
+    // next frame, so the transition has a start state to animate from
+    requestAnimationFrame(() => modal.classList.add('is-open'));
+  };
+
+  const close = () => {
+    modal.classList.remove('is-open');
+    if (reduceMotion.matches) { modal.close(); return; }
+    // wait out the transition so the card doesn't vanish mid-animation
+    let done = false;
+    const finish = () => { if (!done) { done = true; modal.close(); } };
+    modal.addEventListener('transitionend', finish, { once: true });
+    setTimeout(finish, 320);   // fallback if transitionend never fires
+  };
+
+  document.querySelectorAll('.member-card').forEach((card) =>
+    card.addEventListener('click', () => open(card)));
+
+  document.getElementById('mm-close').addEventListener('click', close);
+  // click outside the card body
+  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+  // Esc fires dialog's own cancel; intercept so it animates out too
+  modal.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
+  modal.addEventListener('close', () => { lastFocused?.focus(); lastFocused = null; });
+}
 
 // Term picker. One option today; adding a term is one <li> in members.html.
 const termBtn  = document.getElementById('term-button');
