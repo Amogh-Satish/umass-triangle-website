@@ -363,9 +363,9 @@ img { max-width: 100%; display: block; }
 }
 .mm-close:hover, .mm-close:focus-visible { color: #fff; background: var(--surface-2); border-color: var(--border); }
 
-/* Text left, portrait right. The photo column is a fixed track so the bio always
+/* Portrait left, text right. The photo column is a fixed track so the bio always
    gets the remaining width instead of the two fighting over it. */
-.mm-body { display: grid; grid-template-columns: 1fr 196px; gap: 30px; align-items: start; }
+.mm-body { display: grid; grid-template-columns: 196px 1fr; gap: 30px; align-items: start; }
 .mm-text { min-width: 0; text-align: left; }
 .mm-photo {
   display: block; width: 196px; height: 196px;
@@ -386,12 +386,11 @@ img { max-width: 100%; display: block; }
 }
 .mm-link:hover, .mm-link:focus-visible { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-/* Narrow: stack, photo first. order:-1 keeps the portrait above the name without
-   reordering the DOM, so the heading still comes first for screen readers. */
+/* Narrow: stack. The photo already leads in the DOM, so no order override. */
 @media (max-width: 560px) {
   .member-modal { padding: 28px 22px 24px; }
   .mm-body { grid-template-columns: 1fr; gap: 20px; }
-  .mm-photo { order: -1; width: 148px; height: 148px; margin: 0 auto; }
+  .mm-photo { width: 148px; height: 148px; margin: 0 auto; }
   .mm-text { text-align: center; }
   .mm-links { justify-content: center; }
 }

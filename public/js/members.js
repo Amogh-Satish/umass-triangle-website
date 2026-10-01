@@ -1,4 +1,4 @@
-import { initLayout, refreshAnimations, tilt } from './common.js?v=20261001d';
+import { initLayout, refreshAnimations, tilt } from './common.js?v=20261001e';
 
 initLayout();
 
@@ -40,7 +40,9 @@ if (modal && typeof modal.showModal === 'function') {
     const major = detail.querySelector('.md-major')?.textContent.trim() || '';
 
     document.getElementById('mm-photo').src = photo.getAttribute('src');
-    document.getElementById('mm-photo').alt = name;
+    // alt stays empty on purpose: the name is the adjacent heading and the dialog
+    // is already labelled by it, so alt text here would announce it twice.
+    document.getElementById('mm-photo').alt = '';
     document.getElementById('mm-name').textContent = name;
     // "'29" -> "Class of 2029". A placeholder like "['YY]" has no digits to expand,
     // so it's left as written rather than becoming "Class of 20YY".
