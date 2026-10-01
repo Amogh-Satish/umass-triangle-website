@@ -53,6 +53,11 @@ if (modal && typeof modal.showModal === 'function') {
     document.getElementById('mm-meta').textContent = [major, classOf].filter(Boolean).join(' · ');
     document.getElementById('mm-bio').textContent = detail.querySelector('.md-bio')?.textContent.trim() || '';
 
+    const roleEl = document.getElementById('mm-role');
+    const role = roles.get(name);
+    roleEl.textContent = role || '';
+    roleEl.hidden = !role;
+
     const links = document.getElementById('mm-links');
     links.innerHTML = '';
     for (const [cls, icon, label] of [['.md-linkedin', 'bi-linkedin', 'LinkedIn'],
@@ -93,12 +98,62 @@ if (modal && typeof modal.showModal === 'function') {
   document.querySelectorAll('.member-card').forEach((card) =>
     card.addEventListener('click', () => open(card)));
 
+  // Board role shown in the modal, however it was opened.
+  const roles = new Map();
+  document.querySelectorAll('#eboard .eboard-card').forEach((c) =>
+    roles.set(c.querySelector('h3').textContent.trim(), c.querySelector('h4').textContent.trim()));
+
+  const cardFor = (name) => [...document.querySelectorAll('.member')]
+    .find((li) => li.querySelector('.member-name').textContent.trim() === name)
+    ?.querySelector('.member-card');
+
+  const clearTarget = () =>
+    document.querySelectorAll('.member-card.is-target').forEach((c) => c.classList.remove('is-target'));
+
+  // Clicking a board card walks the reader down to that brother's row, lights it
+  // up, then opens the bio -- so the connection between the two lists is visible
+  // rather than teleporting them into a modal.
+  const openFromBoard = (name) => {
+    const card = cardFor(name);
+    if (!card) return;
+
+    clearTarget();
+    card.classList.add('is-target');
+
+    if (reduceMotion.matches) {
+      card.scrollIntoView({ block: 'center' });
+      open(card);
+      return;
+    }
+
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // smooth scrolling has no completion callback, so wait for scrollend where it
+    // exists and fall back to a timer where it doesn't
+    let fired = false;
+    const then = () => { if (!fired) { fired = true; open(card); } };
+    document.addEventListener('scrollend', then, { once: true });
+    setTimeout(then, 700);
+  };
+
+  // Delegated: Swiper's loop mode clones slides, so per-card listeners would miss
+  // the copies the user actually clicks.
+  document.getElementById('eboard-swiper')?.addEventListener('click', (e) => {
+    const card = e.target.closest('.eboard-card');
+    if (card) openFromBoard(card.querySelector('h3').textContent.trim());
+  });
+
   document.getElementById('mm-close').addEventListener('click', close);
   // click outside the card body
   modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
   // Esc fires dialog's own cancel; intercept so it animates out too
   modal.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
-  modal.addEventListener('close', () => { lastFocused?.focus(); lastFocused = null; });
+  modal.addEventListener('close', () => {
+    lastFocused?.focus();
+    lastFocused = null;
+    // let the glow linger a beat so it's clear which row was opened
+    setTimeout(clearTarget, 900);
+  });
 }
 
 // Term picker. One option today; adding a term is one <li> in members.html.

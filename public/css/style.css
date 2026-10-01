@@ -216,9 +216,13 @@ img { max-width: 100%; display: block; }
 
 /* e-board cards */
 .eboard-card {
-  background: var(--surface); border-radius: 12px;
-  padding: 28px 20px; text-align: center; height: 100%;
+  display: block; width: 100%; height: 100%;
+  background: var(--surface); border: 1px solid transparent; border-radius: 12px;
+  padding: 28px 20px; text-align: center;
+  font: inherit; color: inherit; cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease;
 }
+.eboard-card:hover, .eboard-card:focus-visible { background: var(--surface-2); border-color: rgba(255, 255, 255, .22); }
 /* height:auto is load-bearing. The <img> carries width/height attributes (they
    reserve space so the carousel doesn't reflow as headshots load), and those make
    the height definite -- which makes the browser ignore aspect-ratio entirely and
@@ -282,7 +286,7 @@ img { max-width: 100%; display: block; }
   list-style: none; padding: 0; margin: 0;
   display: grid; grid-template-columns: repeat(auto-fill, minmax(226px, 1fr)); gap: 10px;
 }
-.member-grid li { display: flex; }
+.member-grid li { display: flex; scroll-margin-top: calc(var(--header-h) + 28px); }
 .member-card {
   flex: 1; display: flex; align-items: center; gap: 12px;
   padding: 8px 14px 8px 8px; font: inherit; text-align: left; color: var(--text);
@@ -292,6 +296,13 @@ img { max-width: 100%; display: block; }
 }
 .member-card:hover, .member-card:focus-visible {
   background: var(--surface-2); border-color: rgba(255, 255, 255, .28); transform: translateY(-2px);
+}
+
+/* Set when a board card sends the reader here, so the row they were pointed at is
+   obvious once the scroll lands. Cleared shortly after the modal closes. */
+.member-card.is-target {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(210, 52, 62, .32), 0 0 26px rgba(210, 52, 62, .5);
 }
 .member-photo {
   flex: none; display: block; width: 42px; height: 42px;
@@ -373,6 +384,12 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--border); background: var(--surface-2);
 }
 .mm-name { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; margin: 0; line-height: 1.15; }
+.mm-role {
+  display: inline-block; margin: 10px 0 0; padding: 4px 12px;
+  border-radius: 999px; background: rgba(210, 52, 62, .14); border: 1px solid rgba(210, 52, 62, .4);
+  font-size: .74rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--accent-link);
+}
+.mm-role[hidden] { display: none; }
 .mm-meta { margin: 8px 0 0; font-size: .9rem; color: var(--accent-link); letter-spacing: .02em; }
 .mm-bio { margin: 18px 0 0; line-height: 1.65; color: rgba(255, 255, 255, .84); }
 .mm-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
@@ -398,7 +415,7 @@ img { max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) {
   .member-modal { transition: none; opacity: 1; transform: none; }
   .member-modal::backdrop { transition: none; }
-  .member-card { transition: none; }
+  .member-card, .eboard-card { transition: none; }
   .member-card:hover, .member-card:focus-visible { transform: none; }
 }
 
