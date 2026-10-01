@@ -1,4 +1,4 @@
-import { initLayout, refreshAnimations } from './common.js?v=20261001k';
+import { initLayout, refreshAnimations } from './common.js?v=20261001l';
 
 initLayout();
 
