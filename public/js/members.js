@@ -1,4 +1,4 @@
-import { initLayout, refreshAnimations, tilt } from './common.js';
+import { initLayout, refreshAnimations, tilt } from './common.js?v=20260930a';
 
 initLayout();
 
@@ -16,6 +16,9 @@ new window.Swiper('#eboard-swiper', {
   spaceBetween: 24,
   pagination: { el: '.swiper-pagination', clickable: true },
   navigation: { prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next' },
+  // Swiper's a11y module rewrites the buttons' aria-label on init, so the wording
+  // has to be given here rather than in the HTML.
+  a11y: { prevSlideMessage: 'Previous member', nextSlideMessage: 'Next member' },
   breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
 });
 tilt(document.querySelectorAll('.eboard-card'));
