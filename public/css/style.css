@@ -320,6 +320,30 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); ou
 .letter .sig { margin-top: 26px; font-weight: 600; }
 .letter .sig-role { display: block; margin-top: 3px; font-weight: 400; font-size: .92rem; color: var(--muted); }
 
+/* ---------- about ---------- */
+.about-list { max-width: 820px; margin: 0 auto; padding: 0; list-style: none; display: grid; gap: 14px; }
+.about-list li {
+  position: relative;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 18px 24px 18px 56px; line-height: 1.6;
+}
+/* the Delta T silhouette as the bullet, drawn in CSS so it costs no request */
+.about-list li::before {
+  content: ''; position: absolute; left: 22px; top: 23px;
+  width: 15px; height: 14px; background: var(--accent);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.about-list strong { color: #fff; font-weight: 600; }
+
+.purpose {
+  max-width: 820px; margin: 0 auto; padding: 30px 34px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: 0 14px 14px 0;
+  font-family: var(--font-display); font-size: 1.3rem; font-style: italic;
+  line-height: 1.6; color: rgba(255, 255, 255, .92);
+}
+@media (max-width: 640px) { .purpose { padding: 24px 22px; font-size: 1.12rem; } }
+
 /* ---------- footer ---------- */
 .site-footer { padding: 30px 16px; text-align: center; font-size: .88rem; color: var(--muted); border-top: 1px solid var(--border); }
 .site-footer strong { color: #fff; }

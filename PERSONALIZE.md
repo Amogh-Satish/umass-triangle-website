@@ -12,7 +12,7 @@ grep -rn '\[' public/*.html | grep -v '<!--'
 ## Identity — all five pages
 
 The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
-`address.html` and `404.html`. Change one, change all five.
+`about.html` and `404.html`. Change one, change all five.
 
 - [x] **Instagram** — wired: `instagram.com/triangleumassamherst`
 - [ ] **Chapter email** — the one thing still outstanding. Replace
@@ -48,9 +48,9 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
 - [ ] **Rush banner** image
 - [ ] **Countdown** — set `data-date` on `#countdown`, e.g. `data-date="2026-09-08T19:00"`
 
-## Presidential address (`public/address.html`)
+## About (`public/about.html`)
 
-- [x] Letter and signature — Harsith Thokala, President
+- [x] History points and purpose statement — from nationals
 
 ## Brand and metadata
 

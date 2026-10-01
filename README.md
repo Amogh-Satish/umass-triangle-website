@@ -2,7 +2,7 @@
 
 Public website for Triangle Fraternity at the University of Massachusetts Amherst:
 a dark photo-gallery home page, an executive board carousel and member list, a rush
-page, and a presidential address.
+page, and an about page.
 
 **The live site is static.** Plain HTML, CSS and JavaScript in `public/`, deployed to
 GitHub Pages. No build step, no server, no database, nothing to pay for.
@@ -17,7 +17,7 @@ something, open the page and edit it:
 | Hero text, stats, photo gallery | `public/index.html` |
 | E-board, chairholders, members | `public/members.html` |
 | Rush pitch, links, rush date | `public/rush.html` |
-| President's letter | `public/address.html` |
+| History and purpose | `public/about.html` |
 | Colors, fonts, layout | `public/css/style.css` |
 | Header and footer | the top and bottom of **each** page |
 
