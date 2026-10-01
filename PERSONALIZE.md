@@ -42,9 +42,10 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
       Anurag Dasgupta (Recruitment).
       Nihaal has a headshot; the other 10 cards are still `[Name]` on a placeholder
       headshot. Square photos look best. Drop them in `public/img/eboard/`.
-- [ ] **Active members** — 25 rows; 5 named (Harsith, Aarav, Nihaal, Amogh,
-      Anurag), 20 still `[Member N] ['YY]`. Each card opens a bio modal. Per
-      member, in `members.html`:
+- [x] **Active members** — all 25 named from the roster. One year outstanding
+      (Virendra Bhawsar).
+- [ ] **Member bios** — only Nihaal's is written. Each card opens a bio modal.
+      Per member, in `members.html`:
       - photo: square image in `public/img/members/`, set as the `<img src>`
       - `.md-major` — e.g. "Computer Science"
       - `.md-bio` — a sentence or two in their own voice
