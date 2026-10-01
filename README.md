@@ -46,14 +46,14 @@ Blank or past dates keep it hidden.
 
 ### Cache busting
 
-CSS and JS are referenced with a `?v=` stamp (e.g. `css/style.css?v=20260930a`),
+CSS and JS are referenced with a `?v=` stamp (e.g. `css/style.css?v=20260930c`),
 including the `./common.js` import inside each page module. **Bump every one of
 them together after changing anything in `css/` or `js/`.** Without it browsers
 keep serving the old file, which shows up as markup that updated while its
 behaviour did not -- a button that renders but does nothing.
 
 ```bash
-grep -rn 'v=20260930a' public | wc -l    # find them all before bumping
+grep -rn 'v=20260930c' public | wc -l    # find them all before bumping
 ```
 
 ## Preview locally

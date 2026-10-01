@@ -22,7 +22,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
-  <link href="css/style.css?v=20260930a" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css" rel="stylesheet">
+  <link href="css/style.css?v=20260930c" rel="stylesheet">
 </head>
 <body>
   <div class="scroll-progress" id="scroll-progress"></div>
@@ -50,7 +51,20 @@
 
     <section class="section">
       <div class="section-header">
-        <h2>Fall 2026</h2>
+        <!-- Add a term by adding one <li> here. data-term is what the button shows;
+             aria-selected="true" marks the active one and draws the check. -->
+        <div class="term-select">
+          <button class="term-button" id="term-button" type="button"
+                  aria-haspopup="listbox" aria-expanded="false" aria-controls="term-menu">
+            <span id="term-current">Fall 2026</span>
+            <i class="bi bi-chevron-down" aria-hidden="true"></i>
+          </button>
+          <ul class="term-menu" id="term-menu" role="listbox" aria-label="Choose a term" hidden>
+            <li role="option" aria-selected="true" data-term="Fall 2026" tabindex="-1">
+              <span>Fall 2026</span><i class="bi bi-check-lg" aria-hidden="true"></i>
+            </li>
+          </ul>
+        </div>
         <p>Executive Board</p>
       </div>
       <div class="swiper" id="eboard-swiper">
@@ -165,13 +179,159 @@
     <section class="section">
       <div class="member-list" id="member-list" data-aos="fade-up">
         <h2>Active Members</h2>
-        <ul>
-          <li>[Member 1] <small>['YY]</small></li>
-          <li>[Member 2] <small>['YY]</small></li>
-          <li>[Member 3] <small>['YY]</small></li>
-          <li>[Member 4] <small>['YY]</small></li>
-          <li>[Member 5] <small>['YY]</small></li>
-          <li>[Member 6] <small>['YY]</small></li>
+        <!-- Photos: drop a square image in public/img/members/ and point BOTH the
+             <a href> and the <img src> at it. -->
+        <ul class="member-grid">
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 1] ['YY]" aria-label="View [Member 1]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 1]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 2] ['YY]" aria-label="View [Member 2]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 2]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 3] ['YY]" aria-label="View [Member 3]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 3]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 4] ['YY]" aria-label="View [Member 4]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 4]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 5] ['YY]" aria-label="View [Member 5]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 5]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 6] ['YY]" aria-label="View [Member 6]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 6]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 7] ['YY]" aria-label="View [Member 7]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 7]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 8] ['YY]" aria-label="View [Member 8]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 8]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 9] ['YY]" aria-label="View [Member 9]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 9]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 10] ['YY]" aria-label="View [Member 10]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 10]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 11] ['YY]" aria-label="View [Member 11]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 11]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 12] ['YY]" aria-label="View [Member 12]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 12]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 13] ['YY]" aria-label="View [Member 13]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 13]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 14] ['YY]" aria-label="View [Member 14]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 14]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 15] ['YY]" aria-label="View [Member 15]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 15]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 16] ['YY]" aria-label="View [Member 16]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 16]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 17] ['YY]" aria-label="View [Member 17]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 17]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 18] ['YY]" aria-label="View [Member 18]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 18]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 19] ['YY]" aria-label="View [Member 19]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 19]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 20] ['YY]" aria-label="View [Member 20]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 20]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 21] ['YY]" aria-label="View [Member 21]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 21]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 22] ['YY]" aria-label="View [Member 22]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 22]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 23] ['YY]" aria-label="View [Member 23]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 23]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 24] ['YY]" aria-label="View [Member 24]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 24]</span><small>['YY]</small>
+          </li>
+          <li>
+            <a class="member-photo glightbox" href="img/members/placeholder.svg" data-gallery="members" data-type="image" data-title="[Member 25] ['YY]" aria-label="View [Member 25]">
+              <img src="img/members/placeholder.svg" alt="" width="200" height="200" loading="lazy">
+            </a>
+            <span class="member-name">[Member 25]</span><small>['YY]</small>
+          </li>
         </ul>
       </div>
     </section>
@@ -184,6 +344,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script type="module" src="js/members.js?v=20260930a"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
+  <script type="module" src="js/members.js?v=20260930c"></script>
 </body>
 </html>

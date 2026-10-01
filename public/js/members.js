@@ -1,4 +1,4 @@
-import { initLayout, refreshAnimations, tilt } from './common.js?v=20260930a';
+import { initLayout, refreshAnimations, tilt } from './common.js?v=20260930c';
 
 initLayout();
 
@@ -22,4 +22,46 @@ new window.Swiper('#eboard-swiper', {
   breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
 });
 tilt(document.querySelectorAll('.eboard-card'));
+
+// Member photos open in the same lightbox the home gallery uses. data-gallery
+// groups them, so the arrows step from member to member.
+window.GLightbox?.({ selector: '.member-photo', touchNavigation: true, loop: true, zoomable: true });
+
+// Term picker. One option today; adding a term is one <li> in members.html.
+const termBtn  = document.getElementById('term-button');
+const termMenu = document.getElementById('term-menu');
+
+if (termBtn && termMenu) {
+  const options = [...termMenu.querySelectorAll('[role="option"]')];
+
+  const setOpen = (open) => {
+    termBtn.setAttribute('aria-expanded', String(open));
+    termMenu.hidden = !open;
+    if (open) (options.find((o) => o.getAttribute('aria-selected') === 'true') || options[0])?.focus();
+  };
+
+  const choose = (opt) => {
+    options.forEach((o) => o.setAttribute('aria-selected', String(o === opt)));
+    document.getElementById('term-current').textContent = opt.dataset.term;
+    setOpen(false);
+    termBtn.focus();
+  };
+
+  termBtn.addEventListener('click', () => setOpen(termMenu.hidden));
+
+  options.forEach((opt) => {
+    opt.addEventListener('click', () => choose(opt));
+    opt.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(opt); }
+    });
+  });
+
+  // Escape closes, and so does a click anywhere outside the control.
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !termMenu.hidden) { setOpen(false); termBtn.focus(); }
+  });
+  document.addEventListener('click', (e) => {
+    if (!termMenu.hidden && !e.target.closest('.term-select')) setOpen(false);
+  });
+}
 refreshAnimations();

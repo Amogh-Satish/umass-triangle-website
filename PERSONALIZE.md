@@ -41,7 +41,11 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
       Amogh Satish (Finance), Nihaal Thakran and Anurag Dasgupta (Recruitment).
       Nihaal has a headshot; the other 10 cards are still `[Name]` on a placeholder
       headshot. Square photos look best. Drop them in `public/img/eboard/`.
-- [ ] **Active members** — names and class years
+- [ ] **Active members** — 25 rows, all `[Member N] ['YY]`. Each has a photo that
+      opens in the lightbox: drop a square image in `public/img/members/` and point
+      BOTH the `<a href>` and the `<img src>` at it.
+- [ ] **Terms** — the picker holds only Fall 2026. Add one `<li>` in the
+      `term-menu` list per term; `aria-selected="true"` marks the active one.
 
 ## Rush (`public/rush.html`)
 
