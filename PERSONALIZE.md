@@ -51,6 +51,10 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
       - LinkedIn / Instagram: add `<a class="md-linkedin">` or
         `<a class="md-instagram">` **only** for members who have one. Leave them
         out entirely otherwise — the modal hides the row when neither exists.
+        The link's own text becomes the chip label, so a handle works as well as
+        the network name (see Nihaal's `nihaal.56`).
+
+Nihaal Thakran's entry is filled in as the worked example to copy.
 - [ ] **Terms** — the picker holds only Fall 2026. Add one `<li>` in the
       `term-menu` list per term; `aria-selected="true"` marks the active one.
 

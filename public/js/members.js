@@ -1,4 +1,4 @@
-import { initLayout, refreshAnimations, tilt } from './common.js?v=20261001e';
+import { initLayout, refreshAnimations, tilt } from './common.js?v=20261001f';
 
 initLayout();
 
@@ -64,7 +64,12 @@ if (modal && typeof modal.showModal === 'function') {
       a.href = src.getAttribute('href');
       a.target = '_blank';
       a.rel = 'noopener';
-      a.innerHTML = `<i class="bi ${icon}" aria-hidden="true"></i><span>${label}</span>`;
+      // The source <a>'s text is the chip label when it has one, so a member can
+      // show a handle instead of the network name. Falls back to the default.
+      const text = src.textContent.trim() || label;
+      a.innerHTML = `<i class="bi ${icon}" aria-hidden="true"></i><span></span>`;
+      a.querySelector('span').textContent = text;
+      a.setAttribute('aria-label', `${label}: ${text}`);
       links.appendChild(a);
     }
     links.hidden = !links.children.length;
