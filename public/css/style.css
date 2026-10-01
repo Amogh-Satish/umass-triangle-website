@@ -220,9 +220,15 @@ img { max-width: 100%; display: block; }
   background: var(--surface); border: 1px solid transparent; border-radius: 12px;
   padding: 28px 20px; text-align: center;
   font: inherit; color: inherit; cursor: pointer;
-  transition: background-color .18s ease, border-color .18s ease;
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
-.eboard-card:hover, .eboard-card:focus-visible { background: var(--surface-2); border-color: rgba(255, 255, 255, .22); }
+/* Glow only -- no transform. Anything that moves the card on hover re-triggers
+   pointerleave inside the carousel's own 3D transforms and flickers. */
+.eboard-card:hover, .eboard-card:focus-visible {
+  background: var(--surface-2);
+  border-color: rgba(210, 52, 62, .55);
+  box-shadow: 0 0 24px rgba(210, 52, 62, .22);
+}
 /* height:auto is load-bearing. The <img> carries width/height attributes (they
    reserve space so the carousel doesn't reflow as headshots load), and those make
    the height definite -- which makes the browser ignore aspect-ratio entirely and

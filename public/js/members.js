@@ -1,4 +1,4 @@
-import { initLayout, refreshAnimations, tilt } from './common.js?v=20261001l';
+import { initLayout, refreshAnimations } from './common.js?v=20261001n';
 
 initLayout();
 
@@ -21,7 +21,6 @@ new window.Swiper('#eboard-swiper', {
   a11y: { prevSlideMessage: 'Previous member', nextSlideMessage: 'Next member' },
   breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
 });
-tilt(document.querySelectorAll('.eboard-card'));
 
 // Member bio modal. Built on <dialog> so focus trapping, Escape and the backdrop
 // come from the platform rather than hand-rolled JS.
