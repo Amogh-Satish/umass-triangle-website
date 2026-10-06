@@ -64,6 +64,30 @@ cd public && python3 -m http.server 8080    # http://localhost:8080
 
 Use a server rather than opening the files directly — ES modules do not load over `file://`.
 
+## Deploying to Vercel
+
+The repo carries `vercel.json` (serve `public/`, no build) and `.vercelignore`
+(keep the Express files and the admin dashboard out of the deploy).
+
+```bash
+npm i -g vercel
+cd ~/umass-triangle-website
+vercel login
+vercel            # preview deploy, prints a URL
+vercel --prod     # production deploy
+```
+
+Then point the absolute URLs at whatever Vercel hands back and redeploy, or the
+canonical, Open Graph and sitemap tags keep claiming the GitHub Pages address:
+
+```bash
+tools/set-base-url.sh https://your-project.vercel.app
+vercel --prod
+```
+
+Connecting the GitHub repo from vercel.com instead gives automatic deploys, and a
+preview URL per branch — so `nihaals-branch` gets its own link without merging.
+
 ## Deploying
 
 Pushing to `main` publishes automatically via `.github/workflows/pages.yml`.

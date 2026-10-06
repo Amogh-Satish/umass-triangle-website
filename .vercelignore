@@ -1,0 +1,15 @@
+# The deployed site is the static files in public/. Everything below belongs to
+# the original Express version, which Vercel has nothing to run against.
+server/
+test/
+scripts/
+data/
+config/
+node_modules/
+.github/
+
+# The admin dashboard talks to that API, so on a static host it is a page that
+# looks functional and isn't. The GitHub Pages workflow strips it too.
+public/admin.html
+public/js/admin.js
+public/uploads/
