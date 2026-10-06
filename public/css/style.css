@@ -537,6 +537,30 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); ou
 .site-footer { padding: 30px 16px; text-align: center; font-size: .88rem; color: var(--muted); border-top: 1px solid var(--border); }
 .site-footer strong { color: #fff; }
 
+/* UMass lockup. The mark is already white-mapped, so it sits on the dark footer
+   without the maroon fighting Triangle red. Dimmed further so it reads as an
+   affiliation line rather than a second logo competing with the Delta T. */
+.footer-umass {
+  display: flex; align-items: center; justify-content: center; gap: 11px;
+  margin-bottom: 14px; opacity: .5;
+}
+.footer-umass img { height: 30px; width: auto; }
+.footer-umass span { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+/* About -> At UMass Amherst */
+.campus {
+  max-width: 860px; margin: 0 auto;
+  display: grid; grid-template-columns: 180px 1fr; gap: 34px; align-items: center;
+}
+.campus-mark { width: 180px; height: auto; opacity: .85; }
+.campus-text p { margin: 0 0 1.1em; line-height: 1.75; color: rgba(255, 255, 255, .86); }
+.campus-text p:last-child { margin-bottom: 0; }
+
+@media (max-width: 620px) {
+  .campus { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+  .campus-mark { width: 136px; margin: 0 auto; }
+}
+
 .scroll-top {
   position: fixed; right: 16px; bottom: 16px; z-index: 99;
   width: 44px; height: 44px; border-radius: 50%;

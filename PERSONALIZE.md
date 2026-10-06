@@ -66,6 +66,11 @@ Nihaal Thakran's entry is filled in as the worked example to copy.
 ## About (`public/about.html`)
 
 - [x] History points and purpose statement — from nationals
+- [ ] **"At UMass Amherst" closing line** — `about.html` has a bracketed spot for
+      a sentence on what the chapter is building this year
+- [ ] **UMass logo permission** — the athletic mark is a licensed trademark. It's
+      used in the footer and on the About page; confirm with Greek life /
+      Trademark Licensing before the site goes public
 
 ## Brand and metadata
 
