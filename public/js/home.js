@@ -1,4 +1,4 @@
-import { initLayout, refreshAnimations, countUp, typeText, tilt } from './common.js?v=20261006b';
+import { initLayout, refreshAnimations, countUp, typeText, tilt } from './common.js?v=20261006c';
 
 const introPlaying = initLayout();
 
