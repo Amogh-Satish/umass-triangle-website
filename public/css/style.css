@@ -616,14 +616,14 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); ou
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: url('../img/brand/delta-t-watermark.svg') no-repeat center 45% / auto 54%;
+  background: url('../img/brand/umass-watermark.png') no-repeat center 46% / auto 44%;
   opacity: .085;
   filter: blur(7px);
 }
 
 /* On a short screen the mark crowds the text, so pull it in. */
 @media (max-height: 700px) {
-  .hero-bg--gradient::after { background-size: auto 45%; opacity: .075; filter: blur(6px); }
+  .hero-bg--gradient::after { background-size: auto 37%; opacity: .075; filter: blur(6px); }
 }
 .hero-content { position: relative; z-index: 1; }
 .hero .hero-uni { color: #fff; filter: none; font-weight: 700; }
