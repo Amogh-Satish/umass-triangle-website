@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://amogh-satish.github.io/umass-triangle-website/sitemap.xml
+Sitemap: https://umass-triangle-website.vercel.app/sitemap.xml
