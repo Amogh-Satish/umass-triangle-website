@@ -29,10 +29,10 @@ buildless and crawlable. If you change one, change all five.
 Drop the file in `public/img/`, then copy one block in `public/index.html`:
 
 ```html
-<a class="gallery-item glightbox" href="img/YOUR-PHOTO.jpg" data-title="Caption"
+<a class="gallery-item glightbox" href="img/YOUR-PHOTO.jpg"
    data-type="image" data-aos="fade-up" data-aos-delay="0">
-  <img src="img/YOUR-PHOTO.jpg" alt="Caption" width="800" height="600" loading="lazy">
-  <div class="overlay"><i class="bi bi-arrows-angle-expand"></i><span>Caption</span></div>
+  <img src="img/YOUR-PHOTO.jpg" alt="Describe the photo" width="800" height="600" loading="lazy">
+  <div class="overlay"><i class="bi bi-arrows-angle-expand"></i></div>
 </a>
 ```
 
@@ -46,14 +46,14 @@ Blank or past dates keep it hidden.
 
 ### Cache busting
 
-CSS and JS are referenced with a `?v=` stamp (e.g. `css/style.css?v=20261008a`),
+CSS and JS are referenced with a `?v=` stamp (e.g. `css/style.css?v=20261008b`),
 including the `./common.js` import inside each page module. **Bump every one of
 them together after changing anything in `css/` or `js/`.** Without it browsers
 keep serving the old file, which shows up as markup that updated while its
 behaviour did not -- a button that renders but does nothing.
 
 ```bash
-grep -rn 'v=20261008a' public | wc -l    # find them all before bumping
+grep -rn 'v=20261008b' public | wc -l    # find them all before bumping
 ```
 
 ## Preview locally
