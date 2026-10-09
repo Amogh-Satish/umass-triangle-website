@@ -112,6 +112,19 @@ img { max-width: 100%; display: block; }
 
 .mobile-toggle { display: none; background: none; border: 0; color: #fff; font-size: 1.9rem; cursor: pointer; padding: 4px; }
 
+/* space-between only centres the nav when the two sides weigh the same, and they
+   don't -- the wordmark is far wider than the lone Instagram icon, so the nav sat
+   right of centre. Equal 1fr side columns centre it against the viewport instead
+   of against whatever happens to flank it.
+   Desktop only: below 992px the navbar becomes a fixed full-screen overlay and
+   leaves the flow, which would drop the hamburger into the middle column. */
+@media (min-width: 992px) {
+  .site-header { display: grid; grid-template-columns: 1fr auto 1fr; }
+  .site-header .logo { justify-self: start; }
+  .site-header .navbar { justify-self: center; }
+  .site-header .header-social { justify-self: end; }
+}
+
 @media (max-width: 991px) {
   .site-header { padding: 0 16px; }
   .site-header .logo h1 { font-size: 1.35rem; }
