@@ -17,13 +17,23 @@ slug = lambda s: re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 have = {os.path.splitext(os.path.basename(p))[0]: "img/eboard/" + os.path.basename(p)
         for p in glob.glob(os.path.join(PHOTOS, "*.jpg"))}
 
+# Photos whose filename doesn't contain the member's name as written on the page.
+ALIASES = {}
+_af = os.path.join(os.path.dirname(os.path.abspath(__file__)), "headshot-aliases.txt")
+if os.path.exists(_af):
+    for line in open(_af):
+        line = line.split("#")[0].strip()
+        if "=" in line:
+            src, dst = (x.strip() for x in line.split("=", 1))
+            ALIASES[slug(dst)] = slug(src)
+
 def find(name):
     """Exact slug first, then any filename that contains the member's name.
 
     Lets real-world filenames work as-is -- "Harsith Thokala Headshot.jpg",
     "IMG_2831 aarav singh.heic" -- instead of requiring the name and nothing
     else. Ambiguous hits are reported rather than guessed at."""
-    key = slug(name)
+    key = ALIASES.get(slug(name), slug(name))
     if key in have:
         return have[key], None
     hits = [v for k, v in have.items() if key in k]

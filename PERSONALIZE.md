@@ -37,6 +37,14 @@ The header and footer are repeated in `index.html`, `members.html`, `rush.html`,
       President, Vice President, Secretary, Director of Finance, Recruitment,
       Philanthropy, Risk Management, Innovations, Outreach, External Affairs,
       Education, Social Media, DEI
+- [ ] **Name spellings to confirm** — the headshot filenames disagree with the
+      page for four members. Aliases in `tools/headshot-aliases.txt` map the
+      photos correctly either way, but one spelling is wrong on the site:
+      Kiran Chandy / Chaundry, Koushik Pillalamarri / Pillamarri,
+      Rishabh Katoch / Khatoch, Thomas Oliveria / Oliveira.
+- [ ] **Remaining headshots** — 7 members have none yet: Ezra Goldner,
+      Virendra Bhawsar, Calvary Jamoko, Don Marckheil Desmond,
+      Liam Beretsky-Jewell, Madhav Jhawar, Varun Kumar.
 - [ ] **E-board names + headshots** — named so far: Harsith Thokala (President),
       Amogh Satish (Finance), Aarav Singh (Vice President), Nihaal Thakran and
       Anurag Dasgupta (Recruitment).

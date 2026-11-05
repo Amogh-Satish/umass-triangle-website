@@ -1,0 +1,14 @@
+# photo filename  =  member name on the page
+#
+# For photos whose filename doesn't contain the member's name as written on the
+# site: shortened forms, and filenames spelled differently. One per line.
+
+Abhi Niranjan      = Abhinandan Niranjan
+Alex Lau           = Alexander Lau
+John Santos        = John Santos De Godoy
+
+# spelling differs between the photo filename and the page; see PERSONALIZE.md
+Kiran Chaundry     = Kiran Chandy
+Koushik Pillamarri = Koushik Pillalamarri
+Rishabh Khatoch    = Rishabh Katoch
+Thomas Oliveira    = Thomas Oliveria
