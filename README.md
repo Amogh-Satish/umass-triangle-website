@@ -41,8 +41,10 @@ write a real `alt` — it is read by screen readers and by Google.
 
 ### Adding member headshots
 
-One command for the whole batch. Name each photo after the member -- `Harsith
-Thokala.jpg`, `aarav_singh.heic` -- case, spaces and underscores don't matter.
+One command for the whole batch. Each filename just has to *contain* the member's name -- `Harsith Thokala.jpg`,
+`aarav_singh.heic`, `IMG_2831 Ezra Goldner headshot.jpg` all work. Case, spaces,
+underscores and extra words don't matter. Put the folder anywhere outside the
+repo (`~/Downloads` is fine); the originals should not be committed.
 
 ```bash
 tools/setup-headshots.sh                 # once, creates tools/.venv
@@ -64,14 +66,14 @@ Blank or past dates keep it hidden.
 
 ### Cache busting
 
-CSS and JS are referenced with a `?v=` stamp (e.g. `css/style.css?v=20261105e`),
+CSS and JS are referenced with a `?v=` stamp (e.g. `css/style.css?v=20261105f`),
 including the `./common.js` import inside each page module. **Bump every one of
 them together after changing anything in `css/` or `js/`.** Without it browsers
 keep serving the old file, which shows up as markup that updated while its
 behaviour did not -- a button that renders but does nothing.
 
 ```bash
-grep -rn 'v=20261105e' public | wc -l    # find them all before bumping
+grep -rn 'v=20261105f' public | wc -l    # find them all before bumping
 ```
 
 ## Preview locally
