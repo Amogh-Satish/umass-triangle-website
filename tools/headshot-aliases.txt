@@ -7,7 +7,7 @@ Abhi Niranjan      = Abhinandan Niranjan
 Alex Lau           = Alexander Lau
 John Santos        = John Santos De Godoy
 
-# spelling differs between the photo filename and the page; see PERSONALIZE.md
+# the page spelling is correct in each of these; the filename is misspelled
 Kiran Chaundry     = Kiran Chandy
 Koushik Pillamarri = Koushik Pillalamarri
 Rishabh Khatoch    = Rishabh Katoch
