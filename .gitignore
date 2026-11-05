@@ -7,3 +7,4 @@ public/uploads/*
 .DS_Store
 *.log
 .vercel
+tools/.venv

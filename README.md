@@ -39,6 +39,24 @@ Drop the file in `public/img/`, then copy one block in `public/index.html`:
 Keep `width`/`height` roughly right so the page doesn't jump while images load, and
 write a real `alt` — it is read by screen readers and by Google.
 
+### Adding member headshots
+
+One command for the whole batch. Name each photo after the member -- `Harsith
+Thokala.jpg`, `aarav_singh.heic` -- case, spaces and underscores don't matter.
+
+```bash
+tools/setup-headshots.sh                 # once, creates tools/.venv
+tools/add-headshots.sh ~/Desktop/photos  # every time
+```
+
+It detects the largest face in each photo, crops a square with the eyes about 38%
+down, writes a 520px JPEG, and points both the member row and the e-board card at
+it. Re-encoding drops EXIF, which matters -- phone photos carry GPS coordinates.
+HEIC is handled. It prints who was wired and who is still on the placeholder, and
+flags any photo where no face was found so you can check the framing.
+
+Safe to re-run; it only touches members whose photo it finds.
+
 ### Rush countdown
 
 Set `data-date` on `#countdown` in `public/rush.html` (e.g. `data-date="2026-09-08T19:00"`).
