@@ -11,4 +11,3 @@ John Santos        = John Santos De Godoy
 Kiran Chaundry     = Kiran Chandy
 Koushik Pillamarri = Koushik Pillalamarri
 Rishabh Khatoch    = Rishabh Katoch
-Thomas Oliveira    = Thomas Oliveria
